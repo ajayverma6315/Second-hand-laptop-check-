@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LaptopCheck — Second Hand Laptop Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0e1a;--glass:rgba(255,255,255,0.06);--gb:rgba(255,255,255,0.11);
+  --gbh:rgba(255,255,255,0.16);--text:#e8edf7;--muted:#8892a4;
+  --blue:#4f9eff;--purple:#a78bfa;--green:#34d399;--orange:#fb923c;--red:#f87171;--gold:#fbbf24;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:.15;}
+.o1{width:600px;height:600px;background:#4f9eff;top:-180px;left:-120px;animation:d1 12s ease-in-out infinite alternate;}
+.o2{width:500px;height:500px;background:#a78bfa;bottom:-120px;right:-80px;animation:d2 15s ease-in-out infinite alternate;}
+.o3{width:320px;height:320px;background:#34d399;top:42%;left:52%;animation:d3 10s ease-in-out infinite alternate;}
+@keyframes d1{to{transform:translate(60px,40px)}}
+@keyframes d2{to{transform:translate(-50px,-60px)}}
+@keyframes d3{from{transform:translate(-50%,-50%)scale(1)}to{transform:translate(-50%,-50%)scale(1.2)}}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--gb);}
+.nav-i{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1080px;margin:0 auto;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.logo-ic{-webkit-text-fill-color:initial;}
+.navl{display:flex;gap:4px;}
+.navl a{color:var(--muted);text-decoration:none;font-size:.88rem;padding:7px 14px;border-radius:50px;transition:all .2s;}
+.navl a:hover,.navl a.act{color:var(--blue);background:rgba(79,158,255,.1);}
+
+/* HERO */
+.hero{padding:90px 0 70px;text-align:center;}
+.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(79,158,255,.1);border:1px solid rgba(79,158,255,.28);color:var(--blue);font-size:.78rem;font-weight:500;padding:5px 15px;border-radius:50px;margin-bottom:24px;letter-spacing:.05em;}
+.dot{width:7px;height:7px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1.hero-h{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5.5vw,4rem);line-height:1.1;margin-bottom:18px;background:linear-gradient(135deg,#fff 30%,var(--blue) 65%,var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:520px;margin:0 auto 36px;line-height:1.65;}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-p{background:linear-gradient(135deg,var(--blue),#2563eb);color:#fff;padding:13px 30px;border-radius:50px;font-size:.95rem;font-weight:500;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 0 28px rgba(79,158,255,.32);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 46px rgba(79,158,255,.5);}
+.btn-g{background:var(--glass);color:var(--text);padding:13px 30px;border-radius:50px;font-size:.95rem;font-weight:500;cursor:pointer;border:1px solid var(--gb);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s;}
+.btn-g:hover{background:var(--gbh);}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:54px;}
+.stat{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:16px 26px;text-align:center;}
+.stat .n{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat .l{font-size:.75rem;color:var(--muted);margin-top:3px;}
+
+section{padding:80px 0;}
+.stag{font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--blue);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.stag::before{content:'';width:22px;height:2px;background:var(--blue);border-radius:2px;}
+.stitle{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:10px;}
+.ssub{color:var(--muted);font-size:.97rem;max-width:480px;line-height:1.6;}
+
+/* ══ WIZARD ══ */
+.wbox{background:var(--glass);border:1px solid var(--gb);backdrop-filter:blur(18px);border-radius:26px;overflow:hidden;margin-top:44px;}
+.strk{display:flex;align-items:center;padding:20px 28px;border-bottom:1px solid var(--gb);overflow-x:auto;gap:0;}
+.sd{display:flex;align-items:center;flex-shrink:0;}
+.sdt{width:30px;height:30px;border-radius:50%;border:2px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--muted);transition:all .3s;}
+.sdt.done{background:var(--green);border-color:var(--green);color:#fff;}
+.sdt.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 12px rgba(79,158,255,.5);}
+.slbl{font-size:.68rem;color:var(--muted);margin-left:6px;white-space:nowrap;}
+.slbl.active{color:var(--blue);}
+.sln{flex:1;height:2px;background:var(--gb);margin:0 8px;min-width:14px;}
+.sln.done{background:var(--green);}
+.wp{display:none;padding:30px 28px 24px;}
+.wp.show{display:block;}
+.wnav{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;border-top:1px solid var(--gb);gap:12px;}
+.winfo{font-size:.8rem;color:var(--muted);flex:1;text-align:center;}
+
+/* Test cards */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.tc{background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:16px;padding:20px;transition:all .3s;}
+.tc:hover{transform:translateY(-3px);border-color:rgba(79,158,255,.3);}
+.tci{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:12px;}
+.tci.blue{background:rgba(79,158,255,.15);}
+.tci.purple{background:rgba(167,139,250,.15);}
+.tci.green{background:rgba(52,211,153,.15);}
+.tci.orange{background:rgba(251,146,60,.15);}
+.tci.teal{background:rgba(45,212,191,.15);}
+.tci.red{background:rgba(248,113,113,.15);}
+.tci.gold{background:rgba(251,191,36,.15);}
+.tc h4{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:700;margin-bottom:5px;}
+.tc p{font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.twsteps{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.tws{display:flex;align-items:flex-start;gap:7px;font-size:.76rem;color:var(--muted);}
+.twsn{min-width:19px;height:19px;border-radius:5px;background:rgba(79,158,255,.12);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--blue);flex-shrink:0;}
+.rbtn{width:100%;padding:10px;border-radius:9px;border:1px solid var(--gb);background:rgba(79,158,255,.08);color:var(--blue);font-size:.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.rbtn:hover{background:rgba(79,158,255,.16);border-color:var(--blue);}
+.sb{display:none;margin-top:10px;padding:8px 12px;border-radius:8px;font-size:.76rem;font-weight:500;align-items:center;gap:6px;}
+.sb.show{display:flex;}
+.sb.run{background:rgba(79,158,255,.1);color:var(--blue);border:1px solid rgba(79,158,255,.2);}
+.sb.pass{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2);}
+.spin{animation:spin 1s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Purpose */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+@media(max-width:560px){.pgrid{grid-template-columns:1fr;}}
+.pc{background:rgba(255,255,255,.04);border:2px solid var(--gb);border-radius:16px;padding:20px;cursor:pointer;transition:all .2s;}
+.pc:hover{border-color:rgba(79,158,255,.4);background:rgba(255,255,255,.07);}
+.pc.sel{border-color:var(--blue);background:rgba(79,158,255,.1);}
+.pc .pi{font-size:1.8rem;margin-bottom:8px;}
+.pc h4{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:700;margin-bottom:4px;}
+.pc p{font-size:.76rem;color:var(--muted);line-height:1.5;}
+.pc .ptags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+.ptag{font-size:.68rem;padding:2px 8px;border-radius:50px;background:rgba(255,255,255,.07);color:var(--muted);}
+.pc.sel .ptag{background:rgba(79,158,255,.15);color:var(--blue);}
+.subq{background:rgba(79,158,255,.07);border:1px solid rgba(79,158,255,.2);border-radius:14px;padding:18px;margin-top:14px;}
+.subq h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:12px;color:var(--blue);}
+.sqopts{display:flex;flex-direction:column;gap:8px;}
+.sqo{background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:10px;padding:12px 16px;cursor:pointer;transition:all .2s;font-size:.85rem;}
+.sqo:hover{background:var(--gbh);}
+.sqo.sel{border-color:var(--blue);background:rgba(79,158,255,.1);color:var(--blue);}
+.sqo strong{display:block;font-weight:600;margin-bottom:2px;}
+.sqo span{font-size:.75rem;color:var(--muted);}
+.sqo.sel span{color:rgba(79,158,255,.8);}
+
+/* Specs */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:560px){.sgrid{grid-template-columns:1fr;}}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-size:.78rem;font-weight:600;color:var(--muted);}
+.fg select,.fg input{background:rgba(255,255,255,.05);border:1px solid var(--gb);color:var(--text);border-radius:10px;padding:10px 13px;font-size:.86rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;width:100%;}
+.fg select:focus,.fg input:focus{border-color:var(--blue);}
+.fg select option{background:#141c2e;}
+.ipw{position:relative;}
+.ippfx{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--purple);font-weight:800;font-size:1.1rem;}
+.ipw input{padding-left:26px;border-color:rgba(167,139,250,.25);font-size:1.2rem;font-family:'Syne',sans-serif;font-weight:700;}
+
+/* Upload zone */
+.upzone{border:2px dashed var(--gb);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;font-size:.82rem;color:var(--muted);}
+.upzone:hover,.upzone.drag{border-color:var(--blue);background:rgba(79,158,255,.05);}
+.upres{display:none;padding:12px 14px;border-radius:10px;font-size:.8rem;margin-top:10px;line-height:1.6;}
+.upres.ok{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.22);color:var(--green);}
+.upres.err{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.22);color:var(--red);}
+
+/* Condition */
+.cond-sec{background:rgba(79,158,255,.06);border:1px solid rgba(79,158,255,.18);border-radius:16px;padding:20px;margin-bottom:18px;}
+.cond-sec h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;margin-bottom:5px;color:var(--blue);}
+.cond-sec>p{font-size:.78rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.rslider{flex:1;-webkit-appearance:none;appearance:none;height:6px;border-radius:50px;background:rgba(255,255,255,.1);outline:none;cursor:pointer;}
+.rslider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--blue);cursor:pointer;box-shadow:0 0 10px rgba(79,158,255,.5);}
+.rval{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;min-width:40px;text-align:right;}
+.rlbls{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:4px;}
+.cfb{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:.82rem;font-weight:500;}
+.cfb.great{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:#6ee7b7;}
+.cfb.good{background:rgba(79,158,255,.1);border:1px solid rgba(79,158,255,.25);color:#93c5fd;}
+.cfb.okay{background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.25);color:#fdba74;}
+.cfb.bad{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:#fca5a5;}
+
+/* Result */
+.rhero{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:24px;}
+.scirc{position:relative;width:120px;height:120px;flex-shrink:0;}
+.scirc svg{width:120px;height:120px;}
+.scnw{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.scn{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1;}
+.scl{font-size:.65rem;color:var(--muted);margin-top:2px;}
+.vb{display:inline-block;padding:4px 13px;border-radius:50px;font-size:.73rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
+.vb.great{background:rgba(52,211,153,.15);color:var(--green);border:1px solid rgba(52,211,153,.3);}
+.vb.good{background:rgba(79,158,255,.15);color:var(--blue);border:1px solid rgba(79,158,255,.3);}
+.vb.okay{background:rgba(251,146,60,.15);color:var(--orange);border:1px solid rgba(251,146,60,.3);}
+.vb.bad{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.3);}
+.vi h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:5px;}
+.vi p{font-size:.84rem;color:var(--muted);line-height:1.6;}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px;margin-bottom:22px;}
+.bdi{background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;padding:12px 13px;}
+.bdl{font-size:.7rem;color:var(--muted);margin-bottom:4px;}
+.bdv{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;}
+.bbar{height:4px;border-radius:4px;margin-top:6px;background:rgba(255,255,255,.07);overflow:hidden;}
+.bfill{height:100%;border-radius:4px;transition:width 1s ease .3s;}
+.ksec{border-top:1px solid var(--gb);padding-top:20px;margin-bottom:20px;}
+.ksec h4{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:700;margin-bottom:12px;}
+.klist{display:flex;flex-direction:column;gap:8px;}
+.ki{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-radius:10px;font-size:.82rem;line-height:1.5;}
+.ki.bad{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.18);color:#fca5a5;}
+.ki.warn{background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.18);color:#fdba74;}
+.ki.tip{background:rgba(79,158,255,.07);border:1px solid rgba(79,158,255,.18);color:#93c5fd;}
+.ki.ok{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.18);color:#6ee7b7;}
+.pr{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.22);border-radius:12px;padding:14px 16px;font-size:.83rem;line-height:1.6;color:#c4b5fd;margin-top:14px;}
+.pr strong{color:#e9d5ff;}
+.purpr{border-radius:14px;padding:16px 18px;margin-bottom:18px;}
+.purpr.great{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.25);}
+.purpr.good{background:rgba(79,158,255,.07);border:1px solid rgba(79,158,255,.25);}
+.purpr.okay{background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.25);}
+.purpr.bad{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.25);}
+.purpr h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:6px;}
+.purpr p{font-size:.82rem;line-height:1.6;color:var(--muted);}
+
+/* Checklist */
+.clsec{background:rgba(255,255,255,.02);border:1px solid var(--gb);border-radius:22px;padding:36px;margin-top:40px;}
+.clgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px;}
+@media(max-width:520px){.clgrid{grid-template-columns:1fr;}}
+.cli{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--glass);border:1px solid var(--gb);border-radius:10px;cursor:pointer;transition:all .2s;font-size:.82rem;user-select:none;}
+.cli:hover{background:var(--gbh);}
+.cli.chk{border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.06);}
+.clb{width:20px;height:20px;border-radius:6px;border:2px solid var(--gb);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;}
+.cli.chk .clb{background:var(--green);border-color:var(--green);}
+.pgbar{height:6px;background:rgba(255,255,255,.07);border-radius:50px;overflow:hidden;margin-top:16px;}
+.pgfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:50px;transition:width .4s;}
+
+/* About */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+@media(max-width:660px){.agrid{grid-template-columns:1fr;}}
+.avis{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:32px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;}
+.avis h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;}
+.avis p{color:var(--muted);font-size:.82rem;line-height:1.6;}
+.ftl{display:flex;flex-direction:column;gap:14px;margin-top:20px;}
+.fti{display:flex;gap:13px;align-items:flex-start;}
+.ftic{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.fti h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:3px;}
+.fti p{color:var(--muted);font-size:.8rem;line-height:1.5;}
+
+/* Modal */
+.mov{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;}
+.mov.show{display:flex;}
+.modal{background:#111827;border:1px solid var(--gb);border-radius:20px;padding:32px;max-width:440px;width:100%;position:relative;max-height:88vh;overflow-y:auto;}
+.mcls{position:absolute;top:12px;right:12px;background:var(--glass);border:1px solid var(--gb);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.modal h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+.modal>p{color:var(--muted);font-size:.83rem;line-height:1.6;margin-bottom:16px;}
+.msteps{display:flex;flex-direction:column;gap:9px;}
+.mst{display:flex;gap:11px;align-items:flex-start;padding:10px;background:var(--glass);border-radius:10px;}
+.msn{min-width:24px;height:24px;border-radius:6px;background:rgba(79,158,255,.2);color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;}
+.mst p{font-size:.81rem;color:var(--muted);line-height:1.5;}
+.mst p strong{color:var(--text);}
+
+/* DL button */
+.dlbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--blue),#2563eb);color:#fff;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;box-shadow:0 0 24px rgba(79,158,255,.3);}
+.dlbtn:hover{opacity:.9;transform:translateY(-1px);}
+.dlbtn.done{background:linear-gradient(135deg,var(--green),#059669);box-shadow:0 0 24px rgba(52,211,153,.3);}
+
+footer{border-top:1px solid var(--gb);padding:32px 0;text-align:center;color:var(--muted);font-size:.82rem;}
+footer span{color:var(--blue);}
+
+@media(max-width:768px){
+  .navl{display:none;}
+  .hero{padding:64px 0 48px;}
+  .wp{padding:20px 16px 16px;}
+  .wnav{padding:14px 16px;}
+  .clsec{padding:24px 16px;}
+  .strk{padding:14px 16px;}
+}
+</style>
+</head>
+<body>
+<div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<nav>
+  <div class="nav-i">
+    <a href="#" class="logo"><span class="logo-ic">💻</span>LaptopCheck</a>
+    <div class="navl">
+      <a href="#test" class="act">Test</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+<section class="hero">
+  <div class="badge"><span class="dot"></span>Second Hand Laptop Guide</div>
+  <h1 class="hero-h">Market Jaane Se Pehle<br/>Laptop Ko Test Karo</h1>
+  <p>Second-hand laptop lene se pehle sab tests karo, purpose batao — main batata hoon lena chahiye ya nahi!</p>
+  <div class="btns">
+    <a href="#test" class="btn-p">🚀 Test Shuru Karo</a>
+    <a href="#checklist" class="btn-g">✅ Quick Checklist</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">9</div><div class="l">Hardware Tests</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">Purpose Profiles</div></div>
+    <div class="stat"><div class="n">Free</div><div class="l">Bilkul Free</div></div>
+  </div>
+</section>
+
+<!-- ══════════ WIZARD ══════════ -->
+<section id="test">
+  <div class="stag">All-in-One</div>
+  <h2 class="stitle">Laptop Test 🔬</h2>
+  <p class="ssub">Step by step — tests dekho, file download karo, specs fill karo, result lo!</p>
+
+  <div class="wbox">
+    <div class="strk" id="strk"></div>
+
+    <!-- STEP 1: Tests Guide -->
+    <div class="wp show" id="wp0">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:5px;">Step 1 — Tests Guide 🔧</h3>
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:20px;">Yeh sab tests laptop pe manually chalao. Har card pe guide button hai — click karo aur steps follow karo.</p>
+      <div class="tgrid" id="testCards"></div>
+    </div>
+
+    <!-- STEP 2: Download -->
+    <div class="wp" id="wp1">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:5px;">Step 2 — Scanner File Download Karo ⬇️</h3>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px;">Ek hi file — Battery, RAM, Disk, CPU, GPU sab ek saath scan hoga. Result Desktop pe <strong style="color:var(--text)">LaptopTest.txt</strong> mein save hoga.</p>
+
+      <div style="background:linear-gradient(135deg,rgba(79,158,255,.1),rgba(167,139,250,.07));border:1px solid rgba(79,158,255,.22);border-radius:18px;padding:26px;text-align:center;margin-bottom:18px;">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🗂️</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:4px;">LaptopCheck.bat</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:16px;">Battery · RAM · Disk · CPU · GPU — sab ek scan mein</div>
+        <div style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.22);border-radius:8px;padding:6px 12px;font-size:.73rem;color:var(--green);display:inline-block;margin-bottom:18px;">
+          📂 Save hogi: <strong>Desktop → LaptopTest.txt</strong>
+        </div>
+        <br/>
+        <button id="dlBtn" class="dlbtn" onclick="doDownload()" style="max-width:300px;margin:0 auto;">
+          ⬇️ LaptopCheck.bat Download Karo
+        </button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:16px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:1.3rem;margin-bottom:6px;">1️⃣</div>
+          <div style="font-size:.78rem;font-weight:600;margin-bottom:3px;">Upar Download Karo</div>
+          <div style="font-size:.7rem;color:var(--muted);">Button dabao</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:1.3rem;margin-bottom:6px;">2️⃣</div>
+          <div style="font-size:.78rem;font-weight:600;margin-bottom:3px;">Desktop pe Save Karo</div>
+          <div style="font-size:.7rem;color:var(--muted);">Downloads → Desktop move karo</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:1.3rem;margin-bottom:6px;">3️⃣</div>
+          <div style="font-size:.78rem;font-weight:600;margin-bottom:3px;">Double Click Karo</div>
+          <div style="font-size:.7rem;color:var(--muted);">CMD window khulegi, scan hoga</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:1.3rem;margin-bottom:6px;">4️⃣</div>
+          <div style="font-size:.78zm;font-weight:600;margin-bottom:3px;">Next Dabao</div>
+          <div style="font-size:.7rem;color:var(--muted);">Agle step mein upload karo</div>
+        </div>
+      </div>
+      <div style="background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.2);border-radius:10px;padding:10px 14px;font-size:.76rem;color:#fdba74;line-height:1.6;">
+        ⚠️ <strong>"Windows ne block kiya"</strong> aaye → <strong>More Info → Run Anyway</strong>. Yeh file safe hai.
+      </div>
+    </div>
+
+    <!-- STEP 3: Purpose -->
+    <div class="wp" id="wp2">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:5px;">Step 3 — Kisliye Lena Hai? 🎯</h3>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Sahi suggestion ke liye apna purpose select karo.</p>
+      <div class="pgrid" id="purposeGrid"></div>
+      <div id="subqBox" style="display:none;"></div>
+    </div>
+
+    <!-- STEP 4: Upload + Specs -->
+    <div class="wp" id="wp3">
+      <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:5px;">Step 4 — Specs Fill Karo 📋</h3>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:18px;">LaptopTest.txt upload karo — sab auto fill ho jayega. Ya seedha manually select karo.</p>
+
+      <!-- Upload -->
+      <div style="background:rgba(79,158,255,.06);border:1px solid rgba(79,158,255,.18);border-radius:14px;padding:16px;margin-bottom:20px;">
+        <div style="font-size:.82rem;font-weight:600;margin-bottom:10px;">📤 LaptopTest.txt Upload Karo <span style="font-size:.7rem;color:var(--muted);font-weight:400;">(optional)</span></div>
+        <div class="upzone" onclick="document.getElementById('fileInput').click()"
+          ondragover="event.preventDefault();this.classList.add('drag')"
+          ondragleave="this.classList.remove('drag')"
+          ondrop="onDrop(event)">
+          📂 <strong>LaptopTest.txt</strong> click karke select karo ya drag &amp; drop karo
+        </div>
+        <input type="file" id="fileInput" accept=".txt" style="display:none" onchange="onFileSelect(this)"/>
+        <div class="upres" id="upRes"></div>
+      </div>
+
+      <!-- Physical Condition -->
+      <div class="cond-sec">
+        <h4>📦 Physical Condition — Rate Karo (1–10)</h4>
+        <p>Body, screen, keyboard, ports haath se check karo aur rate karo.<br/>
+        <strong style="color:var(--red);">1–4</strong> = Kharab &nbsp;·&nbsp; <strong style="color:var(--orange);">5–7</strong> = Average &nbsp;·&nbsp; <strong style="color:var(--blue);">7.5–8.5</strong> = Acha &nbsp;·&nbsp; <strong style="color:var(--green);">9–10</strong> = Naya Jaisa</p>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <input type="range" class="rslider" id="condSlider" min="1" max="10" step="0.5" value="5" oninput="updateCond(this.value)" style="flex:1;"/>
+          <div class="rval" id="condVal" style="color:var(--orange);">5.0</div>
+        </div>
+        <div class="rlbls"><span>1 — Kharab</span><span>5 — Average</span><span>10 — Naya</span></div>
+        <div class="cfb okay" id="condFb">😐 Average condition — kuch wear & tear hoga.</div>
+      </div>
+
+      <!-- Price -->
+      <div style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.18);border-radius:14px;padding:16px;margin-bottom:20px;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:4px;color:var(--purple);">💸 Seller Ki Qeemat</div>
+        <div style="font-size:.76rem;color:var(--muted);margin-bottom:12px;">Kitne mein de raha hai? Main bataunga sahi hai ya zyada.</div>
+        <div class="ipw">
+          <span class="ippfx">₹</span>
+          <input type="number" id="f-price" placeholder="00000"/>
+        </div>
+      </div>
+
+      <!-- Auto detect button -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;">⚙️ Technical Specs</div>
+        <button onclick="autoDetect()" style="background:linear-gradient(135deg,var(--green),#059669);color:#fff;border:none;border-radius:50px;padding:7px 16px;font-size:.76rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">⚡ Auto Detect</button>
+      </div>
+      <div id="autoBox" style="display:none;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:14px;margin-bottom:16px;">
+        <div style="font-size:.75rem;font-weight:600;color:var(--green);margin-bottom:8px;">✅ System se yeh mila:</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:7px;" id="autoCards"></div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:8px;">⚠️ Browser se CPU gen, Storage, Battery health detect nahi hoti — woh file se ya manually bharo.</div>
+      </div>
+
+      <div class="sgrid">
+        <div class="fg">
+          <label>⚡ Processor <span style="font-size:.66rem;font-weight:400;color:var(--muted);">(Task Manager → CPU)</span></label>
+          <select id="f-cpu">
+            <option value="">-- Select Processor --</option>
+
+            <optgroup label="── Intel Celeron / Pentium (Bahut Weak) ──">
+              <option value="1">Intel Celeron N3050 / N3060 / N3350</option>
+              <option value="1">Intel Celeron N4000 / N4020 / N4100</option>
+              <option value="1">Intel Celeron N5100 / N5105</option>
+              <option value="1">Intel Celeron (Koi bhi model)</option>
+              <option value="2">Intel Pentium N3700 / N3710</option>
+              <option value="2">Intel Pentium N4200 / N4417U</option>
+              <option value="2">Intel Pentium Gold 4415U / 4417U</option>
+              <option value="2">Intel Pentium Silver N5030 / N6000</option>
+              <option value="2">Intel Pentium (Koi bhi model)</option>
+            </optgroup>
+
+            <optgroup label="── Intel Core i3 ──">
+              <option value="2">i3-6006U / i3-6100U / i3-6157U (6th Gen)</option>
+              <option value="3">i3-7020U / i3-7100U / i3-7130U (7th Gen)</option>
+              <option value="4">i3-8109U / i3-8130U / i3-8145U (8th Gen)</option>
+              <option value="4">i3-9100 / i3-9100F / i3-9100U (9th Gen)</option>
+              <option value="5">i3-1005G1 / i3-10100 / i3-10110U / i3-10125U (10th Gen)</option>
+              <option value="5">i3-1115G4 / i3-1125G4 / i3-11100H (11th Gen)</option>
+              <option value="6">i3-1210U / i3-1215U / i3-1215UE (12th Gen)</option>
+              <option value="6">i3-1305U / i3-1315U / i3-1320P (13th Gen)</option>
+              <option value="7">i3-1415U / i3-1416U (14th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── Intel Core i5 ──">
+              <option value="3">i5-6200U / i5-6300U / i5-6400 / i5-6500 (6th Gen)</option>
+              <option value="4">i5-7200U / i5-7300HQ / i5-7400 / i5-7500 (7th Gen)</option>
+              <option value="5">i5-8250U / i5-8265U / i5-8300H / i5-8400 / i5-8500 (8th Gen)</option>
+              <option value="6">i5-9300H / i5-9400 / i5-9400H / i5-9600K (9th Gen)</option>
+              <option value="7">i5-1035G1 / i5-10210U / i5-10300H / i5-10400 / i5-10500H (10th Gen)</option>
+              <option value="7">i5-1135G7 / i5-1145G7 / i5-11300H / i5-11400H / i5-11500H (11th Gen)</option>
+              <option value="8">i5-1235U / i5-1240P / i5-12400 / i5-12450H / i5-12500H (12th Gen)</option>
+              <option value="9">i5-1335U / i5-1340P / i5-13400 / i5-13450HX / i5-13500H (13th Gen)</option>
+              <option value="9">i5-1435U / i5-1445HX / i5-14500HX (14th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── Intel Core i7 ──">
+              <option value="4">i7-6500U / i7-6600U / i7-6700HQ / i7-6820HQ (6th Gen)</option>
+              <option value="5">i7-7500U / i7-7600U / i7-7700HQ / i7-7820HQ (7th Gen)</option>
+              <option value="6">i7-8550U / i7-8565U / i7-8700 / i7-8750H / i7-8850H (8th Gen)</option>
+              <option value="7">i7-9750H / i7-9850H / i7-9700 / i7-9700K (9th Gen)</option>
+              <option value="8">i7-10510U / i7-10710U / i7-10750H / i7-10870H / i7-10875H (10th Gen)</option>
+              <option value="8">i7-1165G7 / i7-1185G7 / i7-11800H / i7-11850H / i7-11900H (11th Gen)</option>
+              <option value="9">i7-1255U / i7-1260P / i7-1265U / i7-12700H / i7-12800H (12th Gen)</option>
+              <option value="9">i7-1355U / i7-1360P / i7-1365U / i7-13700H / i7-13800H (13th Gen)</option>
+              <option value="10">i7-1455U / i7-1465U / i7-14700HX / i7-14650HX (14th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── Intel Core i9 ──">
+              <option value="9">i9-10885H / i9-10900K / i9-10980HK (10th Gen)</option>
+              <option value="9">i9-11900H / i9-11950H / i9-11980HK (11th Gen)</option>
+              <option value="10">i9-12900H / i9-12900HK / i9-12950HX (12th Gen)</option>
+              <option value="10">i9-13900H / i9-13900HK / i9-13980HX (13th Gen)</option>
+              <option value="10">i9-14900HX / i9-14900HK (14th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── AMD Ryzen (Purana) ──">
+              <option value="1">AMD A4 / A6 / A8 / A10 Series</option>
+              <option value="1">AMD E1 / E2 Series</option>
+              <option value="3">Ryzen 3 2200U / 2300U (2nd Gen)</option>
+              <option value="3">Ryzen 3 3200U / 3250U (3rd Gen)</option>
+              <option value="4">Ryzen 3 4300U / 4300G (4th Gen)</option>
+              <option value="4">Ryzen 3 5300U / 5400U (5th Gen)</option>
+              <option value="5">Ryzen 3 7320U / 7330U (7th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── AMD Ryzen 5 ──">
+              <option value="4">Ryzen 5 2500U / 2600H (2nd Gen)</option>
+              <option value="5">Ryzen 5 3500U / 3550H / 3600 (3rd Gen)</option>
+              <option value="6">Ryzen 5 4500U / 4600H / 4600G (4th Gen)</option>
+              <option value="8">Ryzen 5 5500U / 5600H / 5600U / 5600G (5th Gen)</option>
+              <option value="8">Ryzen 5 6600H / 6600HS / 6600U (6th Gen)</option>
+              <option value="9">Ryzen 5 7530U / 7535U / 7540U / 7640U (7th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── AMD Ryzen 7 ──">
+              <option value="5">Ryzen 7 2700U / 2800H (2nd Gen)</option>
+              <option value="6">Ryzen 7 3700U / 3750H / 3800H (3rd Gen)</option>
+              <option value="7">Ryzen 7 4700U / 4800H / 4800U (4th Gen)</option>
+              <option value="9">Ryzen 7 5700U / 5800H / 5800X (5th Gen)</option>
+              <option value="9">Ryzen 7 6800H / 6800HS / 6800U (6th Gen)</option>
+              <option value="10">Ryzen 7 7735U / 7745HX / 7840U (7th Gen)</option>
+            </optgroup>
+
+            <optgroup label="── AMD Ryzen 9 ──">
+              <option value="9">Ryzen 9 4900H / 4900HS (4th Gen)</option>
+              <option value="10">Ryzen 9 5900HX / 5900X / 5980HX (5th Gen)</option>
+              <option value="10">Ryzen 9 6900HX / 6900HS (6th Gen)</option>
+              <option value="10">Ryzen 9 7940HX / 7945HX (7th Gen)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="fg">
+          <label>🧠 RAM <span id="ramTag" style="font-size:.66rem;font-weight:600;color:var(--green);display:none;">✓ Auto</span></label>
+          <select id="f-ram">
+            <option value="">-- Select --</option>
+            <option value="1">2 GB</option>
+            <option value="2">4 GB</option>
+            <option value="6">8 GB</option>
+            <option value="9">16 GB</option>
+            <option value="10">32 GB+</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>💾 Storage <span style="font-size:.66rem;font-weight:400;color:var(--muted);">(Disk test se)</span></label>
+          <select id="f-storage">
+            <option value="">-- Select --</option>
+            <option value="2">HDD 256GB ya kam</option>
+            <option value="3">HDD 500GB–1TB</option>
+            <option value="5">SSD 128–256GB</option>
+            <option value="8">SSD 512GB</option>
+            <option value="9">SSD 1TB+</option>
+            <option value="7">SSD + HDD combo</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>🎮 GPU <span id="gpuTag" style="font-size:.66rem;font-weight:600;color:var(--green);display:none;">✓ Auto</span></label>
+          <select id="f-gpu">
+            <option value="">-- Select GPU --</option>
+
+            <optgroup label="── Integrated Only (No Dedicated GPU) ──">
+              <option value="2">Intel HD Graphics (4000/5500/6000/620/630)</option>
+              <option value="2">Intel UHD Graphics (620/630/770)</option>
+              <option value="3">Intel Iris Xe Graphics (12th/13th/14th Gen)</option>
+              <option value="3">AMD Radeon Vega 3 / Vega 6 / Vega 8 (Integrated)</option>
+              <option value="3">AMD Radeon 610M / 680M / 780M (Integrated)</option>
+            </optgroup>
+
+            <optgroup label="── NVIDIA GTX Series ──">
+              <option value="4">NVIDIA GTX 940M / 940MX</option>
+              <option value="4">NVIDIA GTX 950M / 960M</option>
+              <option value="5">NVIDIA GTX 1050 (2GB/4GB)</option>
+              <option value="5">NVIDIA GTX 1050 Ti (4GB)</option>
+              <option value="5">NVIDIA GTX 1060 (6GB)</option>
+              <option value="5">NVIDIA GTX 1650 (4GB)</option>
+              <option value="6">NVIDIA GTX 1650 Ti (4GB)</option>
+              <option value="5">NVIDIA GTX 1660 Ti (6GB)</option>
+              <option value="6">NVIDIA GTX 1070 (8GB)</option>
+              <option value="6">NVIDIA GTX 1080 (8GB)</option>
+            </optgroup>
+
+            <optgroup label="── NVIDIA RTX 20 Series ──">
+              <option value="6">NVIDIA RTX 2050 (4GB)</option>
+              <option value="6">NVIDIA RTX 2060 (6GB)</option>
+              <option value="7">NVIDIA RTX 2060 Super (8GB)</option>
+              <option value="7">NVIDIA RTX 2070 (8GB)</option>
+              <option value="7">NVIDIA RTX 2070 Super (8GB)</option>
+              <option value="8">NVIDIA RTX 2080 (8GB)</option>
+              <option value="8">NVIDIA RTX 2080 Super (8GB)</option>
+            </optgroup>
+
+            <optgroup label="── NVIDIA RTX 30 Series ──">
+              <option value="6">NVIDIA RTX 3050 (4GB)</option>
+              <option value="7">NVIDIA RTX 3050 Ti (4GB)</option>
+              <option value="7">NVIDIA RTX 3060 (6GB)</option>
+              <option value="8">NVIDIA RTX 3060 Ti (8GB)</option>
+              <option value="8">NVIDIA RTX 3070 (8GB)</option>
+              <option value="9">NVIDIA RTX 3070 Ti (8GB)</option>
+              <option value="9">NVIDIA RTX 3080 (10GB/16GB)</option>
+              <option value="9">NVIDIA RTX 3080 Ti (16GB)</option>
+              <option value="10">NVIDIA RTX 3090 (24GB)</option>
+            </optgroup>
+
+            <optgroup label="── NVIDIA RTX 40 Series ──">
+              <option value="7">NVIDIA RTX 4050 (6GB)</option>
+              <option value="8">NVIDIA RTX 4060 (8GB)</option>
+              <option value="8">NVIDIA RTX 4060 Ti (8GB/16GB)</option>
+              <option value="9">NVIDIA RTX 4070 (8GB/12GB)</option>
+              <option value="9">NVIDIA RTX 4070 Ti (12GB)</option>
+              <option value="10">NVIDIA RTX 4080 (12GB/16GB)</option>
+              <option value="10">NVIDIA RTX 4090 (16GB/24GB)</option>
+            </optgroup>
+
+            <optgroup label="── AMD Radeon RX (Dedicated) ──">
+              <option value="4">AMD Radeon RX 460 / 470 / 480</option>
+              <option value="4">AMD Radeon RX 550 / 560 / 570 / 580</option>
+              <option value="5">AMD Radeon RX 5300M / 5500M (4GB)</option>
+              <option value="5">AMD Radeon RX 5600M (6GB)</option>
+              <option value="6">AMD Radeon RX 5700M (8GB)</option>
+              <option value="6">AMD Radeon RX 6500M (4GB)</option>
+              <option value="6">AMD Radeon RX 6600M (8GB)</option>
+              <option value="7">AMD Radeon RX 6650M (8GB)</option>
+              <option value="7">AMD Radeon RX 6700M (10GB)</option>
+              <option value="8">AMD Radeon RX 6700 XT (12GB)</option>
+              <option value="8">AMD Radeon RX 6800M (12GB)</option>
+              <option value="9">AMD Radeon RX 6850M XT (12GB)</option>
+              <option value="8">AMD Radeon RX 7600M (8GB)</option>
+              <option value="9">AMD Radeon RX 7700S / 7800 XT (12GB/16GB)</option>
+              <option value="10">AMD Radeon RX 7900M / 7900 XT (16GB)</option>
+            </optgroup>
+          </select>
+          <div id="gpuName" style="display:none;font-size:.72rem;color:var(--green);padding:5px 9px;background:rgba(52,211,153,.08);border-radius:7px;margin-top:3px;"></div>
+        </div>
+        <div class="fg">
+          <label>🔋 Battery Health
+            <span style="font-size:.66rem;font-weight:400;color:var(--muted);">(powercfg /batteryreport se)</span>
+          </label>
+          <div style="background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.2);border-radius:8px;padding:8px 11px;margin-bottom:6px;font-size:.72rem;color:#fdba74;line-height:1.5;">
+            📋 CMD: <code style="background:rgba(0,0,0,.3);padding:1px 5px;border-radius:3px;">powercfg /batteryreport</code> → FullCharge ÷ DesignCapacity × 100 = Health%
+          </div>
+          <select id="f-battery">
+            <option value="">-- Select Health % --</option>
+            <option value="10">95–100% (Naya jaisa — 4–6 ghante)</option>
+            <option value="9">85–95% (Bahut acha — 3–5 ghante)</option>
+            <option value="7">75–85% (Theek hai — 2.5–4 ghante)</option>
+            <option value="5">65–75% (Average — 2–3 ghante)</option>
+            <option value="3">50–65% (Kamzor — 1–2 ghante)</option>
+            <option value="1">Below 50% (Kharab — charger hamesha)</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>🖥️ Screen Condition</label>
+          <select id="f-screen">
+            <option value="">-- Select --</option>
+            <option value="10">Perfect — koi issue nahi</option>
+            <option value="6">Minor scratch</option>
+            <option value="2">Dead pixels hain</option>
+            <option value="0">Crack / Bleeding</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>⌨️ Keyboard & Touchpad</label>
+          <select id="f-keyboard">
+            <option value="">-- Select --</option>
+            <option value="10">Sab working, touchpad smooth</option>
+            <option value="5">1–2 keys nahi chalti</option>
+            <option value="2">Kai keys kharab</option>
+            <option value="0">Touchpad bhi dead</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>🌡️ Heating</label>
+          <select id="f-heat">
+            <option value="">-- Select --</option>
+            <option value="10">Normal — thanda rehta hai</option>
+            <option value="7">Thoda warm (normal hai)</option>
+            <option value="3">Bahut garam hota hai</option>
+            <option value="0">Fan shor + overheat</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>🔌 Body & Ports</label>
+          <select id="f-body">
+            <option value="">-- Select --</option>
+            <option value="10">Sab ports working, clean body</option>
+            <option value="6">1–2 ports nahi chalte</option>
+            <option value="3">Kai dents / scratches</option>
+            <option value="1">Bahut damaged</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: Result -->
+    <div class="wp" id="wp4">
+      <div id="resultBox"></div>
+    </div>
+
+    <div class="wnav">
+      <button class="btn-g" id="btnBack" onclick="goBack()" style="display:none;padding:10px 22px;">← Back</button>
+      <div class="winfo" id="winfo"></div>
+      <button class="btn-p" id="btnNext" onclick="goNext()" style="padding:10px 24px;">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="stag">Quick Check</div>
+  <h2 class="stitle">Market Mein Kya Dekhna Hai</h2>
+  <p class="ssub">Physically laptop check karte waqt yeh sab confirm karo.</p>
+  <div class="clsec">
+    <div style="font-size:.82rem;color:var(--muted);margin-bottom:4px;" id="clProg">0 / 19 complete</div>
+    <div class="pgbar"><div class="pgfill" id="clFill" style="width:0%"></div></div>
+    <div class="clgrid" id="clGrid"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="agrid">
+    <div>
+      <div class="stag">About</div>
+      <h2 class="stitle">Kyun Banaya?</h2>
+      <p class="ssub">Second-hand market mein seller problems chhupata hai. Yeh tool tumhara smart saathi hai.</p>
+      <div class="ftl">
+        <div class="fti"><div class="ftic">🎯</div><div><h4>Seedha Simple</h4><p>Koi technical knowledge nahi chahiye. Steps follow karo, result lo.</p></div></div>
+        <div class="ftic" style="display:none"></div>
+        <div class="fti"><div class="ftic">💻</div><div><h4>Laptop Pe Chalao</h4><p>Jis laptop ko test karna hai usi pe yeh website kholo — sab tests wahan hi chalenge.</p></div></div>
+        <div class="fti"><div class="ftic">🔒</div><div><h4>Free — No Login</h4><p>Koi account nahi, koi data nahi. Direct use karo.</p></div></div>
+      </div>
+    </div>
+    <div class="avis">
+      <div style="font-size:3.2rem;">🛡️</div>
+      <h3>Paisa Waste Hone Se Bachao</h3>
+      <p>Jis laptop ko lene jao — wahi laptop pe yeh website kholo aur tests karo.</p>
+      <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:14px 16px;font-size:.8rem;color:var(--green);line-height:1.7;text-align:left;width:100%;">
+        💡 Seller se bolo —<br/><strong style="color:#fff;">"Ek baar yeh website is laptop pe open karte hain."</strong>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer><p>Made with ❤️ for <span>Second Hand Laptop Buyers</span> &nbsp;|&nbsp; LaptopCheck © 2025</p></footer>
+
+<!-- MODAL -->
+<div class="mov" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="mcls" onclick="closeModal()">✕</button>
+    <h3 id="mTitle"></h3>
+    <p id="mDesc"></p>
+    <div class="msteps" id="mSteps"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let cur = 0;
+let dlDone = false;
+let selPurpose = null;
+let selUnknown = null;
+const STEPS = 5;
+const LABELS = ['Tests','Download','Purpose','Specs','Result'];
+
+// ═══════════════════════════════════════
+// TESTS DATA
+// ═══════════════════════════════════════
+const TESTS = [
+  {id:'battery',ci:'blue',icon:'🔋',title:'Battery Health Check',
+   desc:'CMD se actual battery health % nikalo.',
+   steps:['Run dabao','CMD Admin: powercfg /batteryreport','Desktop/Users pe battery-report.html kholo','FullCharge ÷ Design × 100 = Health %'],
+   guide:{title:'🔋 Battery Health',desc:'Windows CMD se battery report generate hoti hai.',
+    steps:[{l:'CMD Admin',t:'Start mein <strong>cmd</strong> search → <strong>Run as Administrator</strong>.'},
+           {l:'Command',t:'<strong>powercfg /batteryreport</strong> type karo → Enter.'},
+           {l:'File Dekho',t:'<strong>C:\\Users\\YourName\\battery-report.html</strong> browser mein open karo.'},
+           {l:'Health Calc',t:'<strong>Full Charge Capacity ÷ Design Capacity × 100</strong> = Health %. 80%+ = Good.'}]}},
+  {id:'ram',ci:'purple',icon:'🧠',title:'RAM + Slot Check',
+   desc:'RAM kitni hai, DDR type, upgrade slot free hai ya nahi.',
+   steps:['Ctrl+Shift+Esc → Task Manager','Performance → Memory','GB, Speed (MHz), DDR type dekho','Slots used: 1/2 = upgrade possible!'],
+   guide:{title:'🧠 RAM + Slot Check',desc:'Task Manager se puri RAM detail milti hai.',
+    steps:[{l:'Task Manager',t:'<strong>Ctrl+Shift+Esc</strong> dabaao.'},
+           {l:'Performance → Memory',t:'Left mein <strong>Memory</strong> click karo — GB, Speed, DDR type sab.'},
+           {l:'Slots',t:'<strong>Slots used 1/2</strong> = ek slot khali = upgrade possible! <strong>2/2</strong> = full.'},
+           {l:'DDR Type',t:'DDR3 = purana. DDR4 = standard. DDR5 = latest. DDR3 laptop long term avoid karo.'}]}},
+  {id:'disk',ci:'green',icon:'💾',title:'Disk / SSD Health',
+   desc:'HDD hai ya SSD? Bad sectors toh nahi?',
+   steps:['Win+R → cmd → Enter','wmic diskdrive get status,model,size','Status OK hona chahiye','CrystalDiskInfo se deep check karo'],
+   guide:{title:'💾 Disk Health',desc:'CMD se quick check, CrystalDiskInfo se deep.',
+    steps:[{l:'CMD',t:'<strong>Win+R</strong> → <strong>cmd</strong> → Enter.'},
+           {l:'Command',t:'<strong>wmic diskdrive get status,model,size</strong>'},
+           {l:'Status',t:'<strong>OK</strong> aana chahiye. Kuch aur = problem.'},
+           {l:'Deep Check',t:'<strong>CrystalDiskInfo</strong> free download karo. Reallocated Sectors = 0 hona chahiye.'}]}},
+  {id:'screen',ci:'orange',icon:'🖥️',title:'Screen / Dead Pixel Test',
+   desc:'Dead pixels, backlight bleeding check karo.',
+   steps:['Run dabao','F11 se fullscreen karo','Red, Green, Blue, White, Black dekho','Koi dark/light spot = dead pixel'],
+   guide:{title:'🖥️ Screen Test',desc:'Fullscreen color pages se dead pixels check hote hain.',
+    steps:[{l:'Site',t:'<a href="https://deadpixeltest.org" target="_blank" style="color:var(--blue)">deadpixeltest.org</a> kholna hai.'},
+           {l:'Fullscreen',t:'<strong>F11</strong> dabaao.'},
+           {l:'Colors',t:'Red, Green, Blue, White, Black — dhyan se dekho.'},
+           {l:'Signs',t:'Dark/light spot = dead pixel. Corners pe light = backlight bleeding.'}],link:'https://deadpixeltest.org'}},
+  {id:'keyboard',ci:'teal',icon:'⌨️',title:'Keyboard Test',
+   desc:'Har key properly kaam kar rahi hai ya nahi.',
+   steps:['Run dabao','Har key ek ek dabao','Green honi chahiye sab','Gray key = kharab'],
+   guide:{title:'⌨️ Keyboard Test',desc:'Online tester pe har key check karo.',
+    steps:[{l:'Site',t:'<a href="https://www.keyboardchecker.com" target="_blank" style="color:var(--blue)">keyboardchecker.com</a>'},
+           {l:'Har Key',t:'Ek ek karke sab keys dabao — green honi chahiye.'},
+           {l:'Special',t:'Fn, numpad, Esc, Delete zaroor check karo.'},
+           {l:'Result',t:'Gray = kharab. 1-2 se zyada = serious problem.'}],link:'https://www.keyboardchecker.com'}},
+  {id:'cpu',ci:'red',icon:'⚡',title:'CPU Info & Temp',
+   desc:'Processor naam, cores, speed aur temperature check karo.',
+   steps:['Ctrl+Shift+Esc → Task Manager','Performance → CPU','Naam, cores, speed note karo','HWMonitor se temp check karo'],
+   guide:{title:'⚡ CPU Check',desc:'Task Manager se CPU info, HWMonitor se temperature.',
+    steps:[{l:'Task Manager',t:'<strong>Ctrl+Shift+Esc</strong> → Performance → CPU.'},
+           {l:'Info',t:'Processor naam, cores, speed note karo.'},
+           {l:'Generation',t:'Intel: 11th Gen+, AMD: Ryzen 5000+ better hai second hand mein.'},
+           {l:'Temp',t:'<strong>HWMonitor</strong> free download karo. Idle: 40°C se kam hona chahiye.'}]}},
+  {id:'gpu',ci:'gold',icon:'🎮',title:'GPU / Graphics Check',
+   desc:'Dedicated GPU hai ya nahi? VRAM kitni hai?',
+   steps:['Win+X → Device Manager','Display Adapters expand karo','2 GPU = dedicated GPU hai!','Yellow ! = driver problem'],
+   guide:{title:'🎮 GPU Check',desc:'Device Manager se GPU confirm karo.',
+    steps:[{l:'Device Manager',t:'<strong>Win+X</strong> → <strong>Device Manager</strong>.'},
+           {l:'Display Adapters',t:'Expand karo — 2 entries (Intel + NVIDIA/AMD) = dedicated GPU!'},
+           {l:'VRAM',t:'GPU → Right Click → Properties → Dedicated Video Memory. Gaming ke liye 4GB+.'},
+           {l:'Driver',t:'Yellow ! sign = driver problem. Seller se fix karwao.'}]}},
+  {id:'port',ci:'purple',icon:'🔌',title:'Charging Port & Ports Test',
+   desc:'Loose port = motherboard risk. Sab USB, HDMI, audio check karo.',
+   steps:['Charger lagao aur hila ke dekho','Har USB mein pendrive lagao','HDMI se monitor connect karo','Headphone jack sound check karo'],
+   guide:{title:'🔌 Ports Test',desc:'Sab ports physically test karo.',
+    steps:[{l:'Charging Port',t:'Charger lagao aur <strong>gently hila ke dekho</strong> — connection cut = loose/damaged. Repair: ₹1500–4000.'},
+           {l:'USB Ports',t:'Har USB port mein pendrive lagao — detect hona chahiye.'},
+           {l:'HDMI',t:'HDMI port hai toh monitor connect karke dekho.'},
+           {l:'Audio',t:'Headphone lagao — dono ears mein sound aa rahi hai?'}]}},
+];
+
+// ═══════════════════════════════════════
+// PURPOSES
+// ═══════════════════════════════════════
+const PURPOSES = [
+  {id:'student',icon:'📚',title:'Student / Normal Use',desc:'MS Office, movies, YouTube, studies',
+   tags:['MS Office','Movies','Studies','Browsing'],
+   minCpu:4,minRam:6,minStorage:5,needsGpu:false,
+   ok:'Student use ke liye bilkul theek hai! Basic kaam, MS Office, movies sab chalega.',
+   warn:'Chalega lekin thoda slow ho sakta hai heavy multitasking mein.',
+   bad:'Student work ke liye bhi weak hai. RAM ya processor bahut kam hai.'},
+  {id:'office',icon:'💼',title:'Office / Professional',desc:'Excel, Zoom, Teams, emails',
+   tags:['Excel','Zoom/Teams','Emails','Multitasking'],
+   minCpu:5,minRam:6,minStorage:5,needsGpu:false,
+   ok:'Office kaam ke liye solid hai. Excel, Teams, emails sab smooth chalega.',
+   warn:'Basic office chalega lekin heavy meetings ya badi files mein slow ho sakta hai.',
+   bad:'Office use ke liye weak hai. Zoom/Teams bhi lag kar sakta hai.'},
+  {id:'creator',icon:'🎨',title:'Creator / Heavy Work',desc:'Video editing, gaming, design, coding',
+   tags:['Video Editing','Gaming','Design','Coding'],
+   minCpu:7,minRam:9,minStorage:7,needsGpu:true,
+   ok:'Creator work ke liye capable hai! Dedicated GPU hai — editing aur gaming chalega.',
+   warn:'Thoda weak hai. Kuch kaam chalega lekin heavy projects slow honge.',
+   bad:'Creator/gaming ke liye suit nahi karta. GPU nahi ya specs bahut weak.',
+   noGpu:'Creator work ke liye dedicated GPU ZAROORI hai — is mein nahi hai. Mat lo!'},
+  {id:'unknown',icon:'🤔',title:'Pata Nahi / Future ke Liye',desc:'Abhi decide nahi, ya future-proof chahiye',
+   tags:['Future-proof','Flexible'],isUnknown:true},
+];
+
+// ═══════════════════════════════════════
+// WIZARD NAVIGATION
+// ═══════════════════════════════════════
+function buildTrack(){
+  const t = document.getElementById('strk'); t.innerHTML='';
+  LABELS.forEach((l,i)=>{
+    if(i>0){const ln=document.createElement('div');ln.className='sln';ln.id='sln'+(i-1);t.appendChild(ln);}
+    const s=document.createElement('div');s.className='sd';
+    s.innerHTML=`<div class="sdt" id="sdt${i}">${i+1}</div><span class="slbl" id="slbl${i}">${l}</span>`;
+    t.appendChild(s);
+  });
+  updateTrack();
+}
+
+function updateTrack(){
+  for(let i=0;i<STEPS;i++){
+    const d=document.getElementById('sdt'+i);
+    const l=document.getElementById('slbl'+i);
+    if(i<cur){d.className='sdt done';d.innerHTML='✓';}
+    else if(i===cur){d.className='sdt active';d.innerHTML=i+1;l.className='slbl active';}
+    else{d.className='sdt';d.innerHTML=i+1;l.className='slbl';}
+    if(i>0){const ln=document.getElementById('sln'+(i-1));if(ln)ln.className=i<=cur?'sln done':'sln';}
+  }
+  const info=document.getElementById('winfo');
+  const nb=document.getElementById('btnNext');
+  const bb=document.getElementById('btnBack');
+  bb.style.display = cur>0&&cur<4 ? 'flex' : 'none';
+  info.style.color='';
+  if(cur===4){
+    info.textContent='';
+    nb.textContent='🔄 Dobara Karo';
+    nb.style.opacity='1';nb.style.pointerEvents='auto';
+    nb.onclick=resetWizard;
+    nb.style.background='';
+  } else {
+    info.textContent=`Step ${cur+1} of 5`;
+    nb.textContent='Next →';
+    nb.onclick=goNext;
+    // Lock next on step 2 (download) until done
+    if(cur===1&&!dlDone){
+      nb.style.opacity='.38';nb.style.pointerEvents='none';
+      nb.style.background='rgba(255,255,255,.06)';
+    } else {
+      nb.style.opacity='1';nb.style.pointerEvents='auto';nb.style.background='';
+    }
+  }
+}
+
+function showStep(n){
+  document.querySelectorAll('.wp').forEach((p,i)=>p.classList.toggle('show',i===n));
+  updateTrack();
+  if(n===4) buildResult();
+}
+
+function goNext(){
+  if(cur===0){cur=1;showStep(1);return;}
+  if(cur===1){
+    if(!dlDone){flash('Pehle LaptopCheck.bat download karo!');return;}
+    cur=2;showStep(2);return;
+  }
+  if(cur===2){
+    if(!selPurpose){flash('Apna purpose select karo!');return;}
+    if(selPurpose==='unknown'&&!selUnknown){flash('Niche wala sawaal bhi answer karo!');return;}
+    cur=3;showStep(3);return;
+  }
+  if(cur===3){
+    const req=['f-cpu','f-ram','f-storage','f-gpu','f-battery','f-screen','f-keyboard','f-heat','f-body'];
+    for(const id of req){if(!document.getElementById(id).value){flash('Sab specs fill karo pehle!');return;}}
+    cur=4;showStep(4);return;
+  }
+}
+
+function goBack(){
+  if(cur>0&&cur<4){cur--;showStep(cur);}
+}
+
+function flash(msg){
+  const info=document.getElementById('winfo');
+  info.textContent='⚠️ '+msg;info.style.color='var(--orange)';
+  setTimeout(()=>{info.textContent=`Step ${cur+1} of 5`;info.style.color='';},2500);
+}
+
+function resetWizard(){
+  cur=0;dlDone=false;selPurpose=null;selUnknown=null;
+  document.getElementById('dlBtn').innerHTML='⬇️ LaptopCheck.bat Download Karo';
+  document.getElementById('dlBtn').className='dlbtn';
+  document.getElementById('upRes').style.display='none';
+  document.getElementById('fileInput').value='';
+  document.getElementById('autoBox').style.display='none';
+  ['f-cpu','f-ram','f-storage','f-gpu','f-battery','f-screen','f-keyboard','f-heat','f-body'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.getElementById('condSlider').value=5;updateCond(5);
+  document.getElementById('f-price').value='';
+  document.querySelectorAll('.pc').forEach(p=>p.classList.remove('sel'));
+  document.querySelectorAll('.sqo').forEach(o=>o.classList.remove('sel'));
+  document.getElementById('subqBox').style.display='none';
+  showStep(0);buildTrack();
+}
+
+// ═══════════════════════════════════════
+// DOWNLOAD BAT
+// ═══════════════════════════════════════
+const BAT = `@echo off
+chcp 65001 >nul
+setlocal enabledelayedexpansion
+title LaptopCheck Scanner
+color 0A
+echo.
+echo  ========================================
+echo   LaptopCheck - Complete System Scan
+echo  ========================================
+echo  Scanning... please wait...
+echo.
+set "OUT=%USERPROFILE%\\Desktop\\LaptopTest.txt"
+echo LaptopCheck System Report > "%OUT%"
+echo Generated: %DATE% %TIME% >> "%OUT%"
+echo ======================================== >> "%OUT%"
+echo. >> "%OUT%"
+echo [BATTERY] >> "%OUT%"
+for /f %%i in ('powershell -command "try{$b=Get-WmiObject Win32_Battery;if($b){[math]::Round(($b.FullChargeCapacity/$b.DesignCapacity)*100,1)}else{'N/A'}}catch{'N/A'}"') do set HEALTH=%%i
+for /f %%i in ('powershell -command "try{$b=Get-WmiObject Win32_Battery;if($b){$b.EstimatedChargeRemaining}else{'N/A'}}catch{'N/A'}"') do set BPCT=%%i
+echo BATTERY_HEALTH=%HEALTH% >> "%OUT%"
+echo BATTERY_PCT=%BPCT% >> "%OUT%"
+echo. >> "%OUT%"
+echo [RAM] >> "%OUT%"
+set TOTAL_MB=0
+for /f "skip=1" %%a in ('wmic memorychip get Capacity') do (set "C=%%a"&set "C=!C: =!"&if defined C if not "!C!"=="" set /a TOTAL_MB+=!C!/1048576 2>nul)
+set /a RAM_GB=TOTAL_MB/1024
+set SLOTS=0
+for /f "skip=1" %%a in ('wmic memorychip get Capacity') do (set "C=%%a"&set "C=!C: =!"&if defined C if not "!C!"=="" set /a SLOTS+=1)
+for /f %%i in ('powershell -command "try{(Get-WmiObject Win32_PhysicalMemoryArray).MemoryDevices}catch{2}"') do set TSLOTS=%%i
+for /f "skip=1" %%a in ('wmic memorychip get SMBIOSMemoryType') do (set "M=%%a"&set "M=!M: =!"&if defined M if not "!M!"=="" set MT=!M!)
+for /f "skip=1" %%a in ('wmic memorychip get Speed') do (set "S=%%a"&set "S=!S: =!"&if defined S if not "!S!"=="" set MSPD=!S!)
+if "%MT%"=="26" set DDR=DDR4
+if "%MT%"=="34" set DDR=DDR5
+if "%MT%"=="24" set DDR=DDR3
+if "%MT%"=="21" set DDR=DDR2
+if not defined DDR set DDR=Unknown
+echo RAM_GB=%RAM_GB% >> "%OUT%"
+echo RAM_TYPE=%DDR% >> "%OUT%"
+echo RAM_SPEED=%MSPD% >> "%OUT%"
+echo SLOTS_USED=%SLOTS%/%TSLOTS% >> "%OUT%"
+echo. >> "%OUT%"
+echo [DISK] >> "%OUT%"
+for /f %%i in ('powershell -command "try{$d=Get-PhysicalDisk;if($d.MediaType -contains 'SSD'){'SSD'}elseif($d.MediaType -contains 'HDD'){'HDD'}else{$d[0].MediaType}}catch{'Unknown'}"') do set DTYPE=%%i
+for /f "skip=1" %%a in ('wmic diskdrive get Size') do (set "S=%%a"&set "S=!S: =!"&if defined S if not "!S!"=="" set /a DGBX=!S!/1073741824 2>nul)
+for /f "skip=1 tokens=*" %%a in ('wmic diskdrive get Model') do (set "DM=%%a"&if defined DM if not "!DM!"=="" set DMDL=!DM!)
+echo DISK_TYPE=%DTYPE% >> "%OUT%"
+echo DISK_SIZE=%DGBX% >> "%OUT%"
+echo DISK_MODEL=%DMDL% >> "%OUT%"
+echo. >> "%OUT%"
+echo [CPU] >> "%OUT%"
+for /f "skip=1 tokens=*" %%a in ('wmic cpu get Name') do (set "N=%%a"&if defined N if not "!N!"=="" set CNAME=!N!)
+for /f "skip=1" %%a in ('wmic cpu get NumberOfCores') do (set "C=%%a"&set "C=!C: =!"&if defined C if not "!C!"=="" set CORES=!C!)
+for /f "skip=1" %%a in ('wmic cpu get NumberOfLogicalProcessors') do (set "T=%%a"&set "T=!T: =!"&if defined T if not "!T!"=="" set THRDS=!T!)
+echo CPU_NAME=%CNAME% >> "%OUT%"
+echo CPU_CORES=%CORES% >> "%OUT%"
+echo CPU_THREADS=%THRDS% >> "%OUT%"
+echo. >> "%OUT%"
+echo [GPU] >> "%OUT%"
+set GCNT=0
+for /f "skip=1 tokens=*" %%a in ('wmic path win32_videocontroller get Name') do (set "G=%%a"&if defined G if not "!G!"=="" (set /a GCNT+=1&echo GPU_!GCNT!=!G! >> "%OUT%"&set GLAST=!G!))
+for /f "skip=1" %%a in ('wmic path win32_videocontroller get AdapterRAM') do (set "V=%%a"&set "V=!V: =!"&if defined V if not "!V!"=="" set /a VRAM=!V!/1073741824 2>nul)
+echo GPU_NAME=%GLAST% >> "%OUT%"
+echo GPU_COUNT=%GCNT% >> "%OUT%"
+echo GPU_VRAM=%VRAM% >> "%OUT%"
+echo. >> "%OUT%"
+echo SCAN_COMPLETE=YES >> "%OUT%"
+echo ======================================== >> "%OUT%"
+echo.
+echo  ========================================
+echo   SCAN COMPLETE!
+echo  ========================================
+echo   Battery : %HEALTH%%%
+echo   RAM     : %RAM_GB% GB ^(%DDR%^)
+echo   Disk    : %DTYPE% %DGBX%GB
+echo   CPU     : %CNAME%
+echo   GPU     : %GLAST%
+echo.
+echo   Saved: Desktop ^> LaptopTest.txt
+echo   Ab website par upload karo!
+echo  ========================================
+echo.
+pause`;
+
+function doDownload(){
+  const b64="QGVjaG8gb2ZmCmNoY3AgNjUwMDEgPm51bApzZXRsb2NhbCBlbmFibGVkZWxheWVkZXhwYW5zaW9uCnRpdGxlIExhcHRvcENoZWNrIFNjYW5uZXIKY29sb3IgMEEKZWNoby4KZWNobyAgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KZWNobyAgIExhcHRvcENoZWNrIC0gU3lzdGVtIFNjYW4KZWNobyAgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KZWNobyAgU2Nhbm5pbmcuLi4gcGxlYXNlIHdhaXQuLi4KZWNoby4Kc2V0ICJPVVQ9JVVTRVJQUk9GSUxFJVxEZXNrdG9wXExhcHRvcFRlc3QudHh0Igpwb3dlcnNoZWxsIC1FeGVjdXRpb25Qb2xpY3kgQnlwYXNzIC1Db21tYW5kICIkbz0nJVVTRVJQUk9GSUxFJVxEZXNrdG9wXExhcHRvcFRlc3QudHh0JzsgJHI9QCgpOyAkcis9J0xhcHRvcENoZWNrIFN5c3RlbSBSZXBvcnQnOyAkcis9J0dlbmVyYXRlZDogJytbZGF0ZXRpbWVdOjpOb3cuVG9TdHJpbmcoJ2RkL01NL3l5eXkgSEg6bW0nKTsgJHIrPScnOyAkcis9J1tCQVRURVJZXSc7IHRyeXsgJHBmPU5ldy1UZW1wb3JhcnlGaWxlOyBwb3dlcmNmZyAvYmF0dGVyeXJlcG9ydCAvb3V0cHV0ICRwZi5GdWxsTmFtZSAyPiRudWxsOyAkeG1sPVt4bWxdKEdldC1Db250ZW50ICRwZi5GdWxsTmFtZSk7ICRmdWxsPSR4bWwuQmF0dGVyeVJlcG9ydC5CYXR0ZXJpZXMuQmF0dGVyeS5GdWxsQ2hhcmdlQ2FwYWNpdHk7ICRkZXNpZ249JHhtbC5CYXR0ZXJ5UmVwb3J0LkJhdHRlcmllcy5CYXR0ZXJ5LkRlc2lnbkNhcGFjaXR5OyBpZigkZnVsbCAtYW5kICRkZXNpZ24peyRoPVttYXRoXTo6Um91bmQoKCRmdWxsLyRkZXNpZ24pKjEwMCwxKTsgJHIrPSdCQVRURVJZX0hFQUxUSD0nKyRoO31lbHNleyRyKz0nQkFUVEVSWV9IRUFMVEg9Ti9BJzt9IFJlbW92ZS1JdGVtICRwZiAtRm9yY2UgLUVycm9yQWN0aW9uIFNpbGVudGx5Q29udGludWU7IH1jYXRjaHsgdHJ5eyAkYj1HZXQtV21pT2JqZWN0IFdpbjMyX0JhdHRlcnk7IGlmKCRiKXskaD1bbWF0aF06OlJvdW5kKCgkYi5GdWxsQ2hhcmdlQ2FwYWNpdHkvJGIuRGVzaWduQ2FwYWNpdHkpKjEwMCwxKTsgJHIrPSdCQVRURVJZX0hFQUxUSD0nKyRoO31lbHNleyRyKz0nQkFUVEVSWV9IRUFMVEg9Ti9BJzt9fWNhdGNoeyRyKz0nQkFUVEVSWV9IRUFMVEg9Ti9BJzt9fTsgJHIrPScnOyAkcis9J1tSQU1dJzsgdHJ5eyAkY3M9R2V0LVdtaU9iamVjdCBXaW4zMl9Db21wdXRlclN5c3RlbTsgJGdiPVttYXRoXTo6Um91bmQoJGNzLlRvdGFsUGh5c2ljYWxNZW1vcnkvMUdCKTsgJHIrPSdSQU1fR0I9JyskZ2I7ICRjaGlwcz1HZXQtV21pT2JqZWN0IFdpbjMyX1BoeXNpY2FsTWVtb3J5OyAkc3BkPSRjaGlwc1swXS5TcGVlZDsgJG10PSRjaGlwc1swXS5TTUJJT1NNZW1vcnlUeXBlOyAkZGRyPXN3aXRjaCgkbXQpezI0eydERFIzJ30yNnsnRERSNCd9MzR7J0REUjUnfWRlZmF1bHR7J1Vua25vd24nfX07ICRyKz0nUkFNX1RZUEU9JyskZGRyOyAkcis9J1JBTV9TUEVFRD0nKyRzcGQ7ICRhcnI9R2V0LVdtaU9iamVjdCBXaW4zMl9QaHlzaWNhbE1lbW9yeUFycmF5OyAkdG90PSRhcnJbMF0uTWVtb3J5RGV2aWNlczsgJHVzZWQ9KCRjaGlwc3xNZWFzdXJlLU9iamVjdCkuQ291bnQ7ICRyKz0nU0xPVFNfVVNFRD0nKyR1c2VkKycvJyskdG90OyB9Y2F0Y2h7JHIrPSdSQU1fR0I9VW5rbm93bid9OyAkcis9Jyc7ICRyKz0nW0RJU0tdJzsgdHJ5eyAkZD1HZXQtV21pT2JqZWN0IFdpbjMyX0Rpc2tEcml2ZXxTZWxlY3QtT2JqZWN0IC1GaXJzdCAxOyAkc3o9W21hdGhdOjpSb3VuZCgkZC5TaXplLzFHQik7ICRyKz0nRElTS19NT0RFTD0nKyRkLk1vZGVsOyAkcis9J0RJU0tfU0laRT0nKyRzejsgdHJ5eyRwZD1HZXQtUGh5c2ljYWxEaXNrfFNlbGVjdC1PYmplY3QgLUZpcnN0IDE7ICRyKz0nRElTS19UWVBFPScrJHBkLk1lZGlhVHlwZTt9Y2F0Y2h7JHIrPSdESVNLX1RZUEU9VW5rbm93bid9OyB9Y2F0Y2h7JHIrPSdESVNLX1RZUEU9VW5rbm93bid9OyAkcis9Jyc7ICRyKz0nW0NQVV0nOyB0cnl7ICRjPUdldC1XbWlPYmplY3QgV2luMzJfUHJvY2Vzc29yOyAkcis9J0NQVV9OQU1FPScrJGMuTmFtZS5UcmltKCk7ICRyKz0nQ1BVX0NPUkVTPScrJGMuTnVtYmVyT2ZDb3JlczsgJHIrPSdDUFVfVEhSRUFEUz0nKyRjLk51bWJlck9mTG9naWNhbFByb2Nlc3NvcnM7IH1jYXRjaHskcis9J0NQVV9OQU1FPVVua25vd24nfTsgJHIrPScnOyAkcis9J1tHUFVdJzsgdHJ5eyAkZ3M9R2V0LVdtaU9iamVjdCBXaW4zMl9WaWRlb0NvbnRyb2xsZXI7ICRyKz0nR1BVX0NPVU5UPScrJGdzLkNvdW50OyAkZz0kZ3N8U2VsZWN0LU9iamVjdCAtRmlyc3QgMTsgJHIrPSdHUFVfTkFNRT0nKyRnLk5hbWU7ICR2cj1bbWF0aF06OlJvdW5kKCRnLkFkYXB0ZXJSQU0vMUdCKTsgJHIrPSdHUFVfVlJBTT0nKyR2cjsgfWNhdGNoeyRyKz0nR1BVX05BTUU9VW5rbm93bid9OyAkcis9Jyc7ICRyKz0nU0NBTl9DT01QTEVURT1ZRVMnOyAkcnxPdXQtRmlsZSAtRmlsZVBhdGggJG8gLUVuY29kaW5nIFVURjgiCmVjaG8uCmVjaG8gID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CmVjaG8gICBTQ0FOIENPTVBMRVRFIQplY2hvICAgU2F2ZWQ6IERlc2t0b3BcTGFwdG9wVGVzdC50eHQKZWNobyAgIEFiIHdlYnNpdGUgcGFyIHVwbG9hZCBrYXJvIQplY2hvICA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQplY2hvLgpwYXVzZQo=";
+  const bin=atob(b64);
+  const bytes=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  const blob=new Blob([bytes],{type:'application/octet-stream'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='LaptopCheck.bat';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  dlDone=true;
+  const btn=document.getElementById('dlBtn');
+  btn.innerHTML='✅ Downloaded! Ab Run Karo → Phir Next Dabao';
+  btn.className='dlbtn done';
+  updateTrack();
+}
+
+// ═══════════════════════════════════════
+// FILE UPLOAD & PARSE
+// ═══════════════════════════════════════
+function onDrop(e){
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag');
+  parseFile(e.dataTransfer.files[0]);
+}
+function onFileSelect(input){parseFile(input.files[0]);}
+function parseFile(file){
+  if(!file)return;
+  const r=new FileReader();
+  r.onload=e=>fillFromText(e.target.result);
+  r.readAsText(file);
+}
+
+function fillFromText(text){
+  const filled=[];
+  // Battery
+  const bh=text.match(/BATTERY_HEALTH=([\d.]+)/);
+  if(bh){
+    const h=parseFloat(bh[1]),sel=document.getElementById('f-battery');
+    if(h>=95)sel.value='10';
+    else if(h>=85)sel.value='9';
+    else if(h>=75)sel.value='7';
+    else if(h>=65)sel.value='5';
+    else if(h>=50)sel.value='3';
+    else sel.value='1';
+    filled.push('🔋 Battery '+h+'%');
+  }
+  // RAM
+  const rg=text.match(/RAM_GB=(\d+)/);
+  if(rg){
+    const gb=parseInt(rg[1]),sel=document.getElementById('f-ram');
+    if(gb<=2)sel.value='1';else if(gb<=4)sel.value='2';else if(gb<=8)sel.value='6';else if(gb<=16)sel.value='9';else sel.value='10';
+    document.getElementById('ramTag').style.display='inline';
+    filled.push('🧠 RAM '+gb+'GB');
+  }
+  const rd=text.match(/RAM_TYPE=(\S+)/);if(rd)filled.push(rd[1]);
+  // Disk
+  const dt=text.match(/DISK_TYPE=(\S+)/),ds=text.match(/DISK_SIZE=(\d+)/);
+  if(dt&&ds){
+    const t=dt[1].trim(),gb=parseInt(ds[1]),sel=document.getElementById('f-storage');
+    if(t==='HDD')sel.value=gb<=256?'2':'3';
+    else{if(gb<=256)sel.value='5';else if(gb<=512)sel.value='8';else sel.value='9';}
+    filled.push('💾 '+t+' '+gb+'GB');
+  }
+  // CPU - match name to select
+  const cn=text.match(/CPU_NAME=(.+)/);
+  if(cn){
+    const nm=cn[1].trim(),nu=nm.toUpperCase();
+    const sel=document.getElementById('f-cpu');
+    let bestMatch=-1;
+    // Extract model number like "i5-8250U" or "i5-8300H"
+    const modelM = nu.match(/I([3579])[- ]?(\d{4,5}[A-Z]*)/);
+    const ryzenM = nu.match(/RYZEN\s+([3579])\s+(\d{4})/);
+    for(let i=0;i<sel.options.length;i++){
+      const ot=sel.options[i].text.toUpperCase();
+      if(modelM){
+        const series='I'+modelM[1];
+        const modelNum=parseInt(modelM[2]);
+        const gen=modelNum>=10000?Math.floor(modelNum/1000):Math.floor(modelNum/100);
+        if(!ot.includes(series)) continue;
+        // Match generation
+        if(gen>=14&&ot.includes('14TH')){bestMatch=i;break;}
+        if(gen===13&&ot.includes('13TH')){bestMatch=i;break;}
+        if(gen===12&&ot.includes('12TH')){bestMatch=i;break;}
+        if(gen===11&&ot.includes('11TH')){bestMatch=i;break;}
+        if(gen===10&&ot.includes('10TH')){bestMatch=i;break;}
+        if(gen===9&&ot.includes('9TH')){bestMatch=i;break;}
+        if(gen===8&&ot.includes('8TH')){bestMatch=i;break;}
+        if(gen===7&&ot.includes('7TH')){bestMatch=i;break;}
+        if(gen<=6&&ot.includes('6TH')){bestMatch=i;break;}
+      } else if(ryzenM){
+        const r='RYZEN '+ryzenM[1];
+        const rnum=parseInt(ryzenM[2]);
+        if(!ot.includes(r)) continue;
+        if(rnum>=7000&&ot.includes('7000')){bestMatch=i;break;}
+        if(rnum>=5000&&rnum<7000&&ot.includes('5000')){bestMatch=i;break;}
+        if(rnum>=4000&&rnum<5000&&ot.includes('4000')){bestMatch=i;break;}
+        if(rnum>=3000&&rnum<4000&&ot.includes('3000')){bestMatch=i;break;}
+      } else {
+        if(nu.includes('CELERON')&&ot.includes('CELERON')){bestMatch=i;break;}
+        if(nu.includes('PENTIUM')&&ot.includes('PENTIUM')){bestMatch=i;break;}
+        if(nu.includes('RYZEN 9')&&ot.includes('RYZEN 9')){bestMatch=i;break;}
+        if(nu.includes('I9')&&ot.includes('I9')){bestMatch=i;break;}
+      }
+    }
+    if(bestMatch>0){
+      sel.selectedIndex=bestMatch;
+      filled.push('⚡ CPU: '+nm.substring(0,28));
+    } else {
+      // Show detected name as hint even if not matched
+      const hint=document.createElement('div');
+      hint.style.cssText='font-size:.72rem;color:var(--orange);padding:5px 9px;background:rgba(251,146,60,.08);border-radius:7px;margin-top:4px;';
+      hint.textContent='⚡ Detected: '+nm.substring(0,40)+' — manually select karo';
+      const cpuSel=document.getElementById('f-cpu');
+      if(cpuSel.parentNode && !cpuSel.parentNode.querySelector('.cpu-hint')){
+        hint.className='cpu-hint';
+        cpuSel.parentNode.appendChild(hint);
+      }
+      filled.push('⚡ CPU detected (manual select karo)');
+    }
+  }
+  // GPU
+  const gn=text.match(/GPU_NAME=(.+)/);
+  if(gn){
+    const n=gn[1].trim(),nu=n.toUpperCase(),sel=document.getElementById('f-gpu');
+    // RTX 40 series
+    if(nu.includes('4090'))sel.value='10';
+    else if(nu.includes('4080'))sel.value='10';
+    else if(nu.includes('4070'))sel.value='9';
+    else if(nu.includes('4060'))sel.value='8';
+    else if(nu.includes('4050'))sel.value='7';
+    // RTX 30 series
+    else if(nu.includes('3090'))sel.value='10';
+    else if(nu.includes('3080'))sel.value='9';
+    else if(nu.includes('3070'))sel.value='8';
+    else if(nu.includes('3060'))sel.value='7';
+    else if(nu.includes('3050'))sel.value='6';
+    // RTX 20 series
+    else if(nu.includes('2080'))sel.value='8';
+    else if(nu.includes('2070'))sel.value='7';
+    else if(nu.includes('2060'))sel.value='6';
+    else if(nu.includes('2050'))sel.value='6';
+    // GTX series
+    else if(nu.includes('1080'))sel.value='6';
+    else if(nu.includes('1070'))sel.value='6';
+    else if(nu.includes('1660'))sel.value='5';
+    else if(nu.includes('1650'))sel.value='5';
+    else if(nu.includes('1060'))sel.value='5';
+    else if(nu.includes('1050'))sel.value='5';
+    else if(nu.includes('960')||nu.includes('950')||nu.includes('940'))sel.value='4';
+    // AMD RX 7000
+    else if(nu.includes('7900'))sel.value='10';
+    else if(nu.includes('7800')||nu.includes('7700'))sel.value='9';
+    else if(nu.includes('7600'))sel.value='8';
+    // AMD RX 6000
+    else if(nu.includes('6850')||nu.includes('6800'))sel.value='8';
+    else if(nu.includes('6700'))sel.value='7';
+    else if(nu.includes('6650')||nu.includes('6600'))sel.value='6';
+    else if(nu.includes('6500'))sel.value='6';
+    // AMD RX 5000
+    else if(nu.includes('5700'))sel.value='6';
+    else if(nu.includes('5600')||nu.includes('5500'))sel.value='5';
+    // AMD older
+    else if(nu.includes('580')||nu.includes('570')||nu.includes('560'))sel.value='4';
+    // Integrated
+    else if(nu.includes('IRIS XE')||nu.includes('IRIS XE'))sel.value='3';
+    else if(nu.includes('VEGA'))sel.value='3';
+    else if(nu.includes('INTEL')||nu.includes('UHD')||nu.includes('IRIS')||nu.includes('HD GRAPHICS'))sel.value='2';
+    else if(nu.includes('NVIDIA')||nu.includes('RADEON'))sel.value='5'; // unknown dedicated
+    document.getElementById('gpuTag').style.display='inline';
+    document.getElementById('gpuName').style.display='block';
+    document.getElementById('gpuName').textContent='GPU: '+n.substring(0,40);
+    filled.push('🎮 GPU ok');
+  }
+  // Show result
+  const box=document.getElementById('upRes');
+  box.style.display='block';
+  if(filled.length>0){
+    box.className='upres ok';
+    box.innerHTML='<strong>✅ Auto fill ho gaya!</strong> '+filled.join(' · ')+'<br/><span style="font-size:.72rem;opacity:.8;">Niche specs verify karo — sahi hai na!</span>';
+  } else {
+    box.className='upres err';
+    box.innerHTML='⚠️ File parse nahi ho payi. Sahi LaptopCheck.bat se generate ki file upload karo.';
+  }
+}
+
+function matchIntelGen(cpuN,optT){
+  const m=cpuN.match(/[I][3579]-?(\d{4,5})/);if(!m)return true;
+  const n=parseInt(m[1]),g=n>=10000?Math.floor(n/1000):Math.floor(n/100);
+  if(g>=14&&optT.includes('14TH'))return true;
+  if(g>=13&&g<14&&optT.includes('13TH'))return true;
+  if(g>=12&&g<13&&optT.includes('12TH'))return true;
+  if(g>=11&&g<12&&optT.includes('11TH'))return true;
+  if(g>=10&&g<11&&optT.includes('10TH'))return true;
+  if(g===9&&optT.includes('9TH'))return true;
+  if(g===8&&optT.includes('8TH'))return true;
+  if(g===7&&optT.includes('7TH'))return true;
+  if(g<=6&&optT.includes('6TH'))return true;
+  return false;
+}
+function matchAMDGen(cpuN,optT){
+  const m=cpuN.match(/(\d{4})/);if(!m)return true;
+  const n=parseInt(m[1]);
+  if(n>=7000&&optT.includes('7000'))return true;
+  if(n>=5000&&n<7000&&optT.includes('5000'))return true;
+  if(n>=4000&&n<5000&&optT.includes('4000'))return true;
+  if(n>=3000&&n<4000&&optT.includes('3000'))return true;
+  return false;
+}
+
+// ═══════════════════════════════════════
+// AUTO DETECT (Browser APIs)
+// ═══════════════════════════════════════
+function autoDetect(){
+  const cards=[];let any=false;
+  // RAM
+  if(navigator.deviceMemory){
+    any=true;const gb=navigator.deviceMemory;
+    const sel=document.getElementById('f-ram');
+    if(gb<=2)sel.value='1';else if(gb<=4)sel.value='2';else if(gb<=8)sel.value='6';else if(gb<=16)sel.value='9';else sel.value='10';
+    document.getElementById('ramTag').style.display='inline';
+    cards.push({i:'🧠',l:'RAM (approx)',v:gb+'GB+',c:'var(--purple)'});
+  }
+  // CPU cores hint
+  if(navigator.hardwareConcurrency){
+    any=true;
+    cards.push({i:'⚡',l:'CPU Cores',v:navigator.hardwareConcurrency+' cores',c:'var(--blue)'});
+  }
+  // GPU via WebGL
+  try{
+    const gl=(document.createElement('canvas')).getContext('webgl')||document.createElement('canvas').getContext('experimental-webgl');
+    if(gl){
+      const ext=gl.getExtension('WEBGL_debug_renderer_info');
+      if(ext){
+        const r=gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)||'';
+        any=true;
+        const ru=r.toUpperCase(),sel=document.getElementById('f-gpu');
+        if(ru.includes('4060')||ru.includes('4070')||ru.includes('4080'))sel.value='9';
+        else if(ru.includes('3060')||ru.includes('3070')||ru.includes('3080'))sel.value='7';
+        else if(ru.includes('3050')||ru.includes('1650')||ru.includes('1050'))sel.value='6';
+        else if(ru.includes('NVIDIA')||ru.includes('RADEON')){if(!ru.includes('INTEL'))sel.value='6';}
+        else if(ru.includes('INTEL')||ru.includes('UHD')||ru.includes('IRIS'))sel.value='2';
+        if(sel.value){
+          document.getElementById('gpuTag').style.display='inline';
+          document.getElementById('gpuName').style.display='block';
+          document.getElementById('gpuName').textContent='GPU: '+r.substring(0,40);
+        }
+        cards.push({i:'🎮',l:'GPU',v:r.substring(0,22),c:'var(--gold)'});
+      }
+    }
+  }catch(e){}
+  // Screen res
+  cards.push({i:'🖥️',l:'Screen',v:screen.width+'×'+screen.height,c:'var(--orange)'});
+  if(any){
+    document.getElementById('autoBox').style.display='block';
+    document.getElementById('autoCards').innerHTML=cards.map(c=>`<div style="background:rgba(255,255,255,.05);border:1px solid var(--gb);border-radius:9px;padding:9px 11px;"><div style="font-size:.68rem;color:var(--muted);margin-bottom:3px;">${c.i} ${c.l}</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:${c.c};">${c.v}</div></div>`).join('');
+  }
+}
+
+// ═══════════════════════════════════════
+// PURPOSE
+// ═══════════════════════════════════════
+function buildPurpose(){
+  const g=document.getElementById('purposeGrid');g.innerHTML='';
+  PURPOSES.forEach(p=>{
+    const tags=p.tags.map(t=>`<span class="ptag">${t}</span>`).join('');
+    const d=document.createElement('div');d.className='pc';d.id='pc-'+p.id;
+    d.innerHTML=`<div class="pi">${p.icon}</div><h4>${p.title}</h4><p>${p.desc}</p><div class="ptags">${tags}</div>`;
+    d.onclick=()=>pickPurpose(p.id);
+    g.appendChild(d);
+  });
+}
+function pickPurpose(id){
+  selPurpose=id;selUnknown=null;
+  document.querySelectorAll('.pc').forEach(c=>c.classList.remove('sel'));
+  document.getElementById('pc-'+id).classList.add('sel');
+  const sb=document.getElementById('subqBox');
+  if(id==='unknown'){
+    sb.style.display='block';
+    sb.innerHTML=`<div class="subq"><h4>🤔 Abhi kya karte ho laptop pe?</h4><div class="sqopts">
+      <div class="sqo" id="sq-normal" onclick="pickUnknown('normal')"><strong>Normal kaam</strong><span>Browsing, YouTube, documents — light use</span></div>
+      <div class="sqo" id="sq-heavy" onclick="pickUnknown('heavy')"><strong>Pata nahi / Future-proof chahiye</strong><span>Kaam badh sakta hai — safe side rehna chahiye</span></div>
+    </div></div>`;
+  } else sb.style.display='none';
+}
+function pickUnknown(id){
+  selUnknown=id;
+  document.querySelectorAll('.sqo').forEach(o=>o.classList.remove('sel'));
+  document.getElementById('sq-'+id).classList.add('sel');
+}
+
+// ═══════════════════════════════════════
+// CONDITION SLIDER
+// ═══════════════════════════════════════
+function updateCond(v){
+  v=parseFloat(v);
+  document.getElementById('condVal').textContent=v.toFixed(1);
+  const pct=((v-1)/9)*100;
+  document.getElementById('condSlider').style.background=`linear-gradient(to right,var(--blue) ${pct}%,rgba(255,255,255,.1) ${pct}%)`;
+  const fb=document.getElementById('condFb'),val=document.getElementById('condVal');
+  if(v>=9){val.style.color='var(--green)';fb.className='cfb great';fb.innerHTML='🌟 Bahut achi condition!';}
+  else if(v>=7.5){val.style.color='var(--blue)';fb.className='cfb good';fb.innerHTML='✅ Achi condition — specs bhi match kare toh great deal!';}
+  else if(v>=5){val.style.color='var(--orange)';fb.className='cfb okay';fb.innerHTML='😐 Average condition — price mein discount maango.';}
+  else{val.style.color='var(--red)';fb.className='cfb bad';fb.innerHTML='⚠️ Condition kharab ('+v.toFixed(1)+'/10) — repair cost extra lag sakti hai.';}
+}
+window.addEventListener('load',()=>updateCond(5));
+
+// ═══════════════════════════════════════
+// TEST CARDS
+// ═══════════════════════════════════════
+function buildTests(){
+  const g=document.getElementById('testCards');g.innerHTML='';
+  TESTS.forEach(t=>{
+    const steps=t.steps.map((s,i)=>`<div class="tws"><div class="twsn">${i+1}</div><span>${s}</span></div>`).join('');
+    g.innerHTML+=`<div class="tc"><div class="tci ${t.ci}">${t.icon}</div><h4>${t.title}</h4><p>${t.desc}</p><div class="twsteps">${steps}</div><button class="rbtn" onclick="openGuide('${t.id}',this)">▶ Guide Dekho</button><div class="sb" id="sb-${t.id}"></div></div>`;
+  });
+}
+function openGuide(id,btn){
+  const t=TESTS.find(x=>x.id===id);
+  const s=document.getElementById('sb-'+id);
+  s.className='sb show run';s.innerHTML='<span class="spin">⟳</span> Guide load ho rahi hai...';
+  btn.disabled=true;
+  setTimeout(()=>{
+    s.className='sb show pass';s.innerHTML='✓ Guide ready!';btn.disabled=false;
+    document.getElementById('mTitle').innerHTML=t.guide.title;
+    document.getElementById('mDesc').textContent=t.guide.desc;
+    const ms=document.getElementById('mSteps');ms.innerHTML='';
+    t.guide.steps.forEach((st,i)=>{ms.innerHTML+=`<div class="mst"><div class="msn">${i+1}</div><p><strong>${st.l}:</strong> ${st.t}</p></div>`;});
+    if(t.guide.link)ms.innerHTML+=`<a href="${t.guide.link}" target="_blank" class="btn-p" style="margin-top:12px;text-decoration:none;justify-content:center;">🔗 Site Kholna</a>`;
+    document.getElementById('modal').classList.add('show');
+  },600);
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+
+// ═══════════════════════════════════════
+// RESULT
+// ═══════════════════════════════════════
+function buildResult(){
+  const cond=parseFloat(document.getElementById('condSlider').value)||5;
+  const price=+document.getElementById('f-price').value||0;
+  const cpu=+document.getElementById('f-cpu').value||0;
+  const ram=+document.getElementById('f-ram').value||0;
+  const storage=+document.getElementById('f-storage').value||0;
+  const gpu=+document.getElementById('f-gpu').value||0;
+  const battery=+document.getElementById('f-battery').value||0;
+  const screen=+document.getElementById('f-screen').value||0;
+  const keyboard=+document.getElementById('f-keyboard').value||0;
+  const heat=+document.getElementById('f-heat').value||0;
+  const body=+document.getElementById('f-body').value||0;
+
+  const sc={cpu:Math.min(cpu,10),ram,storage,gpu,battery,screen,keyboard,heat,body};
+  const wt={cpu:20,ram:15,storage:13,gpu:10,battery:14,screen:10,keyboard:8,heat:7,body:3};
+  let tot=0,maxT=0;
+  for(const k in wt){tot+=(sc[k]/10)*wt[k];maxT+=wt[k];}
+  const specScore=Math.round((tot/maxT)*100);
+  const condScore=Math.round((cond/10)*100);
+  const score=Math.round(specScore*0.75+condScore*0.25);
+
+  const effPurp=selPurpose==='unknown'?(selUnknown==='heavy'?'creator':'student'):selPurpose;
+  const purp=PURPOSES.find(p=>p.id===effPurp)||PURPOSES[0];
+  const hasGpu=gpu>=6;
+
+  // Purpose verdict
+  let pVerdict,pClass;
+  if(purp.needsGpu&&!hasGpu){pVerdict=purp.noGpu;pClass='bad';}
+  else{
+    const ok=cpu>=purp.minCpu&&ram>=purp.minRam&&storage>=purp.minStorage;
+    const close=cpu>=(purp.minCpu-1)&&ram>=(purp.minRam-2)&&storage>=(purp.minStorage-1);
+    if(ok){pVerdict=purp.ok;pClass='great';}
+    else if(close){pVerdict=purp.warn;pClass='okay';}
+    else{pVerdict=purp.bad;pClass='bad';}
+  }
+
+  // Unknown heavy + no GPU note
+  let unknNote='';
+  if(selPurpose==='unknown'&&selUnknown==='heavy'){
+    unknNote=hasGpu?'<div class="ki ok"><span>🎯</span><span><strong>Future-proof ke liye acha!</strong> Dedicated GPU hai.</span></div>':'<div class="ki warn"><span>💡</span><span><strong>Future-proof ke liye dedicated GPU wala lo</strong> — is mein nahi hai.</span></div>';
+  }
+
+  // Overall verdict
+  const hardAvoid=cond<4&&specScore<40;
+  const condBad=cond<4;
+  let vClass,vText,vTitle,vDesc;
+  if(hardAvoid){vClass='bad';vText='Bilkul Mat Lo!';vTitle='Yeh Laptop Avoid Karo ❌';vDesc='Condition bhi kharab ('+cond.toFixed(1)+'/10) aur specs bhi weak. Paisa waste hoga.';}
+  else if(condBad&&score<60){vClass='bad';vText='Avoid Karo';vTitle='Is Laptop Se Dur Raho ❌';vDesc='Condition kharab ('+cond.toFixed(1)+'/10) aur specs bhi average. Risk mat lo.';}
+  else if(score>=78){vClass='great';vText='Ek Dum Badiya!';vTitle='Lo Yeh Laptop! ✅';vDesc='Condition bhi, specs bhi — sab acha hai. Deal karo!';}
+  else if(score>=58){vClass='good';vText='Theek Thaak';vTitle='Soch Samajh Ke Lo 🤔';vDesc='Kuch kami hai lekin chalega. Niche kamiyaan dekho.';}
+  else if(score>=38){vClass='okay';vText='Risky Deal';vTitle='Price Negotiate Karo ⚠️';vDesc='Kaafi problems hain. Price kam karo ya better option dekho.';}
+  else{vClass='bad';vText='Mat Lo!';vTitle='Yeh Laptop Mat Lo ❌';vDesc='Bahut zyada problems. Paisa barbad hoga.';}
+
+  // Breakdown
+  const bl={cpu:'Processor',ram:'RAM',storage:'Storage',gpu:'GPU',battery:'Battery',screen:'Screen',keyboard:'Keyboard',heat:'Cooling',body:'Body'};
+  const bc={cpu:'#4f9eff',ram:'#a78bfa',storage:'#34d399',gpu:'#fbbf24',battery:'#4f9eff',screen:'#fb923c',keyboard:'#2dd4bf',heat:'#f87171',body:'#94a3b8'};
+  let bdHtml='';
+  for(const k in bl){const p=Math.round((sc[k]/10)*100),col=sc[k]>=7?bc[k]:sc[k]>=4?'#fb923c':'#f87171';bdHtml+=`<div class="bdi"><div class="bdl">${bl[k]}</div><div class="bdv" style="color:${col}">${p}%</div><div class="bbar"><div class="bfill" style="width:0%;background:${col}" data-w="${p}"></div></div></div>`;}
+
+  // Kamiyaan
+  const kamis=[];
+  if(cond<4)kamis.unshift({t:'bad',i:'❌',m:`<strong>Physical condition bahut kharab (${cond.toFixed(1)}/10)</strong> — Repair cost extra lag sakti hai.`});
+  else if(cond<5.5)kamis.push({t:'warn',i:'⚠️',m:`<strong>Condition average se neeche (${cond.toFixed(1)}/10)</strong> — Price mein discount maango.`});
+  if(cpu<=2)kamis.push({t:'bad',i:'❌',m:'<strong>Processor bahut purana/weak</strong> — Normal kaam bhi slow lagega.'});
+  else if(cpu<=4)kamis.push({t:'warn',i:'⚠️',m:'<strong>Processor average</strong> — Heavy multitasking slow padega.'});
+  if(ram<=2)kamis.push({t:'bad',i:'❌',m:'<strong>RAM bahut kam (4GB ya kam)</strong> — Browser mein zyada tabs bhi nahi chalenge.'});
+  if(storage<=3)kamis.push({t:'bad',i:'❌',m:'<strong>HDD hai SSD nahi</strong> — Laptop start hone mein 2-3 min lagenge.'});
+  if(!hasGpu&&purp.needsGpu)kamis.push({t:'bad',i:'❌',m:'<strong>Dedicated GPU nahi</strong> — '+purp.title+' ke liye GPU zaroori hai.'});
+  if(battery<=1)kamis.push({t:'bad',i:'❌',m:'<strong>Battery almost dead</strong> — Hamesha charger chahiye. Replace cost: ₹1500–3000.'});
+  else if(battery<=4)kamis.push({t:'warn',i:'⚠️',m:'<strong>Battery weak (50-65%)</strong> — Jaldi replace karni padegi.'});
+  if(screen<=2)kamis.push({t:'bad',i:'❌',m:'<strong>Screen mein dead pixels / crack</strong> — Screen replace ₹5000–15000.'});
+  if(keyboard<=2)kamis.push({t:'bad',i:'❌',m:'<strong>Keyboard mein kai keys kharab</strong> — External keyboard laganaa padega.'});
+  if(heat<=3)kamis.push({t:'bad',i:'❌',m:'<strong>Laptop bahut overheat</strong> — CPU damage ho sakta hai. Thermal paste lagwao.'});
+  if(kamis.length===0)kamis.push({t:'ok',i:'🎉',m:'<strong>Koi badi kami nahi!</strong> Sab theek hai. Confidently deal karo!'});
+
+  // Price - detailed comparison
+  let priceHtml='';
+  if(price>0){
+    // Fair base price by spec score
+    let base=specScore>=85?48000:specScore>=75?38000:specScore>=65?28000:specScore>=55?20000:specScore>=42?14000:specScore>=30?9000:5000;
+    // Condition multiplier
+    const cm=cond>=9?1.15:cond>=7.5?1.0:cond>=5.5?0.82:cond>=4?0.65:0.5;
+    const fair=Math.round(base*cm/500)*500;
+    const lo=Math.round(fair*0.85/500)*500;
+    const hi=Math.round(fair*1.15/500)*500;
+    const diff=price-fair;
+    const diffPct=Math.round((diff/fair)*100);
+    let pv='',pclass='pr';
+    if(price>hi*1.2){
+      pv=`<div style="margin-bottom:10px;">💰 <strong style="color:#fca5a5;">Bahut Zyada Overpay Hoga!</strong></div>
+      <div style="font-size:.82rem;line-height:1.8;">
+        Seller ki price: <strong>₹${price.toLocaleString('en-IN')}</strong><br/>
+        Fair price range: <strong style="color:var(--green);">₹${lo.toLocaleString('en-IN')} – ₹${hi.toLocaleString('en-IN')}</strong><br/>
+        Tum zyada de rahe ho: <strong style="color:#fca5a5;">₹${Math.abs(diff).toLocaleString('en-IN')} extra (~${Math.abs(diffPct)}%)</strong><br/>
+        <span style="color:#fdba74;">👉 Seller se ₹${lo.toLocaleString('en-IN')} – ₹${hi.toLocaleString('en-IN')} mein maango. Na maane toh chhod do.</span>
+      </div>`;
+    } else if(price>hi){
+      pv=`<div style="margin-bottom:10px;">💰 <strong style="color:#fdba74;">Thodi Zyada Qeemat Hai</strong></div>
+      <div style="font-size:.82rem;line-height:1.8;">
+        Seller ki price: <strong>₹${price.toLocaleString('en-IN')}</strong><br/>
+        Fair price range: <strong style="color:var(--green);">₹${lo.toLocaleString('en-IN')} – ₹${hi.toLocaleString('en-IN')}</strong><br/>
+        Thoda zyada hai: <strong style="color:#fdba74;">~₹${Math.abs(diff).toLocaleString('en-IN')} extra</strong><br/>
+        <span style="color:#93c5fd;">👉 Negotiate karo — ₹${lo.toLocaleString('en-IN')} – ₹${hi.toLocaleString('en-IN')} reasonable hai.</span>
+      </div>`;
+    } else if(price<lo*0.75){
+      pv=`<div style="margin-bottom:10px;">💰 <strong style="color:#fdba74;">Qeemat Bahut Kam Hai — Dhyan Do!</strong></div>
+      <div style="font-size:.82rem;line-height:1.8;">
+        Seller ki price: <strong>₹${price.toLocaleString('en-IN')}</strong><br/>
+        Fair price range: <strong style="color:var(--green);">₹${lo.toLocaleString('en-IN')} – ₹${hi.toLocaleString('en-IN')}</strong><br/>
+        <span style="color:#fdba74;">👉 Ya toh great deal hai ya koi hidden problem hai. Ek baar aur carefully sab check karo.</span>
+      </div>`;
+    } else {
+      pv=`<div style="margin-bottom:10px;">💰 <strong style="color:var(--green);">Qeemat Bilkul Sahi Hai! ✅</strong></div>
+      <div style="font-size:.82rem;line-height:1.8;">
+        Seller ki price: <strong>₹${price.toLocaleString('en-IN')}</strong><br/>
+        Fair price range: <strong style="color:var(--green);">₹${lo.toLocaleString('en-IN')} – ₹${hi.toLocaleString('en-IN')}</strong><br/>
+        <span style="color:#6ee7b7;">👉 Fair range mein hai. Confidently deal kar sakte ho!</span>
+      </div>`;
+    }
+    priceHtml=`<div class="${pclass}" style="margin-top:16px;">${pv}</div>`;
+  }
+
+  const arcCol=vClass==='great'?'#34d399':vClass==='good'?'#4f9eff':vClass==='okay'?'#fb923c':'#f87171';
+
+  document.getElementById('resultBox').innerHTML=`
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">
+      <div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:11px;padding:10px 16px;font-size:.8rem;">Physical<span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-left:10px;color:${arcCol};">${cond.toFixed(1)}/10</span></div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:11px;padding:10px 16px;font-size:.8rem;">Specs<span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-left:10px;color:var(--blue);">${specScore}/100</span></div>
+      ${price>0?`<div style="background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:11px;padding:10px 16px;font-size:.8rem;">Price<span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-left:10px;color:var(--purple);">₹${price.toLocaleString('en-IN')}</span></div>`:''}
+    </div>
+    <div class="rhero">
+      <div class="scirc">
+        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/><circle cx="60" cy="60" r="52" fill="none" id="sarc" stroke="${arcCol}" stroke-width="9" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset 1.2s ease"/></svg>
+        <div class="scnw"><div class="scn" id="scn" style="color:${arcCol}">${score}</div><div class="scl">/ 100</div></div>
+      </div>
+      <div class="vi">
+        <div class="vb ${vClass}">${vText}</div>
+        <h3>${vTitle}</h3>
+        <p>${vDesc}</p>
+      </div>
+    </div>
+    <div class="purpr ${pClass}"><h4>${purp.icon} ${purp.title} ke liye:</h4><p>${pVerdict}</p></div>
+    ${unknNote}
+    <div class="bgrid">${bdHtml}</div>
+    <div class="ksec"><h4>🔎 Kamiyaan (${kamis.filter(k=>k.t!=='ok').length} issues)</h4><div class="klist">${kamis.map(k=>`<div class="ki ${k.t}"><span>${k.i}</span><span>${k.m}</span></div>`).join('')}</div></div>
+    ${priceHtml}
+    <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;">
+      <button class="btn-p" onclick="resetWizard()" style="flex:1;justify-content:center;">🔄 Dobara Check Karo</button>
+      <button class="btn-g" onclick="window.print()" style="flex:1;justify-content:center;">🖨️ Save / Print</button>
+    </div>`;
+
+  setTimeout(()=>{
+    const arc=document.getElementById('sarc');
+    if(arc)arc.style.strokeDashoffset=326.7-(326.7*score/100);
+    document.querySelectorAll('.bfill').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  },150);
+}
+
+// ═══════════════════════════════════════
+// CHECKLIST
+// ═══════════════════════════════════════
+const CL=[
+  'Screen mein koi crack ya scratch nahi','Sab ports working (USB, HDMI)',
+  'Charger working hai','Touchpad smoothly kaam karta hai',
+  'Speakers mein sound sahi aata hai','Webcam working hai',
+  'WiFi connect ho raha hai','Bluetooth kaam karta hai',
+  'Fan noise normal hai','Body mein zyada dent nahi',
+  'Windows licensed hai','RAM upgrade slot free hai',
+  'SSD hai HDD ki jagah','Battery charge ho rahi hai',
+  'BIOS password nahi laga','Seller ke paas original bill hai',
+  'Serial number verify kiya — stolen nahi',
+  'Charging port tight hai — loose nahi',
+  'GPU driver sahi hai — Device Manager mein yellow sign nahi'
+];
+const clSet=new Set();
+function buildChecklist(){
+  const g=document.getElementById('clGrid');g.innerHTML='';
+  CL.forEach((t,i)=>{
+    const el=document.createElement('div');el.className='cli';
+    el.innerHTML=`<div class="clb" id="clb${i}"></div><span>${t}</span>`;
+    el.onclick=()=>{
+      if(clSet.has(i)){clSet.delete(i);el.classList.remove('chk');document.getElementById('clb'+i).innerHTML='';}
+      else{clSet.add(i);el.classList.add('chk');document.getElementById('clb'+i).innerHTML='✓';}
+      const p=Math.round(clSet.size/CL.length*100);
+      document.getElementById('clFill').style.width=p+'%';
+      document.getElementById('clProg').textContent=clSet.size+' / '+CL.length+' complete';
+    };
+    g.appendChild(el);
+  });
+}
+
+// Nav scroll highlight
+window.addEventListener('scroll',()=>{
+  const ids=['test','checklist','about'];let cur2='test';
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&scrollY>=el.offsetTop-130)cur2=id;});
+  document.querySelectorAll('.navl a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+cur2));
+});
+
+// INIT
+buildTrack();
+buildTests();
+buildPurpose();
+buildChecklist();
+</script>
+</body>
+</html>
