@@ -4,8 +4,6 @@
 # laptopscout
 
 secound hand laptop checkar
-## Live Site
-[View Website](https://laptopscout.in/)
 
 ## Built With
 - HTML / CSS / JavaScript
